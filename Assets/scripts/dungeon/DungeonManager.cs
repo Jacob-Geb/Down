@@ -1,49 +1,58 @@
 ﻿using UnityEngine;
 using dungeon;
 using dungeon.room;
+using config;
 
 public class DungeonManager : MonoBehaviour {
 
-    DungeonModel duneonModel;
-    RoomFactory roomFactory;
-    RoomView currentRoom = null;
+    public DungeonModel dungeonModel;
+    private DungeonView dungeonView;
  
 	void Start () {
-        duneonModel = new DungeonModel();
-        roomFactory = new RoomFactory(transform);
-	}
-	
-	void Update () {
-	
+        dungeonModel = new DungeonModel();
 	}
 
     public void OnResetDungeon()
     {
+        clearDungeon();
         resetDungeon();
+    }
+
+    public void OnChangeRoom(Dir direction)
+    {
+        dungeonModel.changeRoom(direction);
+        dungeonView.changeRoom(dungeonModel, direction);
     }
 
     public void OnDescend()
     {
-        makeNewFloor();
+        clearDungeon();
+        dungeonModel.descend();
+        generateDungeon();
     }
 
     private void resetDungeon()
     {
-        if (currentRoom)
-            Destroy(currentRoom);
-
-        duneonModel.resetDungeon();
+        dungeonModel.resetDungeon();
     }
 
-    private void makeNewFloor()
+    private void generateDungeon()
     {
-        RoomType roomType = RoomType.CELLAR;// TODO get lvl from DungeonModel
-        currentRoom = roomFactory.makeRoom(roomType);
+        dungeonModel.generateDungeon();
+        
+        dungeonView = DungeonFactory.makeDungeonView(transform);
+        dungeonView.generateDungeon(dungeonModel);
+    }
+
+    private void clearDungeon()
+    {
+        if (dungeonView != null) {
+            Destroy(dungeonView.gameObject);
+        }
     }
 
     public void OnLeaveBattle()
     {
-        if (currentRoom)
-            currentRoom.gameObject.SetActive(true);
+
     }
 }

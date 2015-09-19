@@ -1,13 +1,15 @@
 ﻿using UnityEngine;
-using System.Collections;
 using config;
 using characters.player;
+using characters.enemy;
+using battle;
 
 public class GameManager : MonoBehaviour
 {
     PlayerModel playerModel;
-    DungeonModel dungeonModel;
-
+    public DungeonManager dungeonManager;
+    public string x;
+    // other managers
 	void Start () {
         playerModel = new PlayerModel();
         BroadcastMessage(MsgID.ADD_TOWN);
@@ -16,22 +18,34 @@ public class GameManager : MonoBehaviour
 	void Update () {
 	}
 
-    public void TryEnterDungeon()
+    public void TryEnterDungeon()// dungeon lvl 0
     {
         BroadcastMessage(MsgID.RESET_DUNGEON);
         BroadcastMessage(MsgID.DESCEND);
     }
 
-    public void TryDescend()
+    public void TryDescend()// dungeon lvl++
     {
         BroadcastMessage(MsgID.DESCEND);
     }
 
+    public void TryChangeRoom(Dir direction)
+    {
+        // if (navigationManager.canChange(direction))
+        BroadcastMessage(MsgID.CHANGE_ROOM, direction);
+    }
+
     public void TryEnterBattle(int roomID)
     {
+        // move this elsewhere
+        EnemyType enemyType = dungeonManager.dungeonModel.getCurrentEnemy();
 
-        dungeonModel
-        BroadcastMessage(MsgID.ENTER_BATTLE);
+        if (enemyType != EnemyType.NONE)
+        {
+            EnemyModel enemyModel = EnemyFactory.fromType(enemyType);
+            BattleArgs args = new BattleArgs(playerModel, enemyModel);
+            BroadcastMessage(MsgID.ENTER_BATTLE, args);
+        }
     }
 
     public void TryLeaveBattle()

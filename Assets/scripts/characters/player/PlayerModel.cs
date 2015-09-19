@@ -1,21 +1,18 @@
-﻿using System;
+﻿using battle.attacks;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
 namespace characters.player
 {
-    class PlayerModel
+    public class PlayerModel : BaseCharacter
     {
-        public float hp;
 
         // left hand
         // right hand
+
+        // body
         
         // consumables & useables
 
         // pasives 
-
         public PlayerModel()//args
         {
             resetPlayer();
@@ -24,6 +21,22 @@ namespace characters.player
         public void resetPlayer()
         {
             hp = 5.0f;
+        }
+
+        public List<AttackArgs> abilities
+        {
+            get { 
+                List<AttackArgs> abilities = new List<AttackArgs>();
+
+                // from left
+                // reom right hand
+                // from class..
+
+                // tmps
+                abilities.Add(new AttackArgs(2, 5));
+
+                return abilities;
+            }
         }
         
     }

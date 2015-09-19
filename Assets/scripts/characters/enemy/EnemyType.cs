@@ -1,6 +1,6 @@
 ﻿namespace characters.enemy
 {
-    enum EnemyType
+    public enum EnemyType
     {
         NONE = 0,
         CELLAR_RAT,

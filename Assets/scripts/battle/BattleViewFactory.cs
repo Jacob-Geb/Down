@@ -9,11 +9,9 @@ namespace battle
 {
     class BattleViewFactory
     {
-        Transform conatiner = null;
 
-        public BattleViewFactory(Transform cont)
+        public BattleViewFactory()
         {
-            conatiner = cont;
         }
 
         public GameObject makePlayerView( )
