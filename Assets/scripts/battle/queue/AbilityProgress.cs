@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace battle.queue
 {
-    class AbilityProgress
+    public class AbilityProgress
     {
         public AttackArgs args;
         public float progress {

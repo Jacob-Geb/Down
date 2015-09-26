@@ -1,13 +1,41 @@
 ﻿using config;
+using Dungeon;
+using game;
 using UnityEngine;
 
-public class TownManager : MonoBehaviour
+namespace town
 {
-    public void OnAddTown()
+    public class TownManager : MonoBehaviour
     {
-        GameObject floor = GameObject.Instantiate(Resources.Load("floors/Town", typeof(GameObject))) as GameObject;
-        floor.transform.SetParent(transform);
-        floor.transform.localScale = Vector3.one;
-        floor.transform.localPosition = Positions.CENTER;
+
+        private GameObject townView;
+
+        void OnEnable()
+        {
+            Messenger.AddListener(GameEvent.RESET_GAME, addTownView);
+            Messenger.AddListener(DungeonEvent.ENTER_DUNGEON, removeTownView);
+        }
+
+        void OnDisable()
+        {
+            Messenger.RemoveListener(GameEvent.RESET_GAME, addTownView);
+            Messenger.RemoveListener(DungeonEvent.ENTER_DUNGEON, removeTownView);
+        }
+
+        public void addTownView()
+        {
+            townView = GameObject.Instantiate(Resources.Load("floors/Town", typeof(GameObject))) as GameObject;
+            townView.transform.SetParent(transform);
+            townView.transform.localScale = Vector3.one;
+            townView.transform.localPosition = Positions.CENTER;
+        }
+
+        public void removeTownView()
+        {
+            if (townView != null)
+            {
+                Destroy(townView.gameObject);
+            }
+        }
     }
 }

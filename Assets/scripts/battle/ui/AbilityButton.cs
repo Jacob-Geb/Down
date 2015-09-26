@@ -16,7 +16,7 @@ namespace battle.ui
 
         public void OnBtnPress()
         {
-            Messenger<AttackArgs>.Broadcast(BattleView.ABILITY_PRESS, attackArgs, MessengerMode.DONT_REQUIRE_LISTENER);
+            Messenger<AttackArgs>.Broadcast(BattleUIEvent.ABILITY_BTN_PRESS, attackArgs, MessengerMode.DONT_REQUIRE_LISTENER);
         }
     }
 }

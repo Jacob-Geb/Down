@@ -59,7 +59,8 @@ namespace battle.queue
 
         private void onShortPress()
         {
-            Messenger<int>.Broadcast(AbilityQueue.TRY_CANCEL_ABILITY, id);
+            // TODO: if (player's)
+            Messenger<int>.Broadcast(BattleUIEvent.PLAYER_QUEUE_ITEM_PRESS, id);
         }
 
     }

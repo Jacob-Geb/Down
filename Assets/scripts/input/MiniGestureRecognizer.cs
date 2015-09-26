@@ -12,7 +12,7 @@ public class MiniGestureRecognizer : MonoBehaviour
 
     private void Start()
     {
-#if UNITY_EDITOR || UNITY_STANDALONE || UNITY_WEBPLAYER
+#if (UNITY_EDITOR || UNITY_STANDALONE || UNITY_WEBPLAYER)
         Destroy(this);
 #endif
     }

@@ -3,9 +3,11 @@ using battle;
 using battle.attacks;
 using battle.queue;
 using characters;
+using characters.ai;
 using characters.enemy;
 using characters.player;
 using config;
+using game;
 using UnityEngine;
 
 namespace battle
@@ -17,10 +19,10 @@ namespace battle
         private PlayerModel playerModel;
         private EnemyModel enemyModel;
 
+        private EnemyAI enemyAI;
+
         private AbilityQueue playerQueue;
         private AbilityQueue enemyQueue;
-
-        public static string TRIGGER_PLAYER_ABILITY = "triggerPlayerAbility";
 
         void Start()
         {
@@ -28,16 +30,42 @@ namespace battle
 
         void OnEnable()
         {
-            Messenger<AttackArgs>.AddListener(TRIGGER_PLAYER_ABILITY, triggerPlayerAbility);
+            // TODO SHOULD WE BE LISTENING TO THESE IF WE'RE NOT IN BATTLEMODE??
+            // DO WE DELEAT THE MANAGER?
+            Messenger<AttackArgs>.AddListener(BattleEvent.TRIGGER_PLAYER_ABILITY, triggerPlayerAbility);
+            Messenger<BattleArgs>.AddListener(BattleEvent.ENTER_BATTLE, enterBattle);
+            Messenger.AddListener(BattleEvent.LEAVE_BATTLE_VICTORIOUS, leaveBattleVictorious);
+            Messenger.AddListener(BattleEvent.LEAVE_BATTLE_DEFEATED, leaveBattleDefeated);
         }
 
         void OnDisable()
         {
-            Messenger<AttackArgs>.RemoveListener(TRIGGER_PLAYER_ABILITY, triggerPlayerAbility);
+            Messenger<AttackArgs>.RemoveListener(BattleEvent.TRIGGER_PLAYER_ABILITY, triggerPlayerAbility);
+            Messenger<BattleArgs>.RemoveListener(BattleEvent.ENTER_BATTLE, enterBattle);
+            Messenger.RemoveListener(BattleEvent.LEAVE_BATTLE_VICTORIOUS, leaveBattleVictorious);
+            Messenger.RemoveListener(BattleEvent.LEAVE_BATTLE_DEFEATED, leaveBattleDefeated);
         }
 
+        private void Update()
+        {
+            // TODO ()if battleStarted && !battleEnded
+            updateBattle();
+        }
 
-        public void OnEnterBattle(BattleArgs args)
+        private void updateBattle()
+        {
+            // move these out somewhere
+            if (enemyAI != null)
+                enemyAI.updateAI();
+
+            if (playerQueue != null)
+                playerQueue.updateQueue();
+
+            if (enemyQueue != null)
+                enemyQueue.updateQueue();
+        }
+
+        public void enterBattle(BattleArgs args)
         {
             initBattleViews(args);
             initQueues();
@@ -55,17 +83,23 @@ namespace battle
 
             playerModel = args.playerModel;
             enemyModel = args.enemyModel;
+            enemyAI = new EnemyAI();//TODO: args.enemyModel or type or whatever
         }
 
         private void initQueues()
         {
             GameObject playerView = GetComponentInChildren<BattleView>().
                     gameObject.GetComponentInChildren<PlayerView>().gameObject;
+            AbilityQueueView playerQueueView = playerView.GetComponentInChildren<AbilityQueueView>();
 
-            AbilityQueue playerQueue = playerView.GetComponentInChildren<AbilityQueue>();
-            playerQueue.init(triggerPlayerAbility);
+            playerQueue = ScriptableObject.CreateInstance<PlayerQueue>();
+            playerQueue.init(triggerPlayerAbility, playerQueueView, 3);
 
-            // same for enemy
+            GameObject enemyView = GetComponentInChildren<BattleView>().
+                    gameObject.GetComponentInChildren<EnemyView>().gameObject;
+            AbilityQueueView enemyQueueView = enemyView.GetComponentInChildren<AbilityQueueView>();
+            enemyQueue = ScriptableObject.CreateInstance<EnemyQueue>();
+            enemyQueue.init(triggerEnemyAbility, enemyQueueView, 1);
         }
 
         private void triggerPlayerAbility(AttackArgs attackArgs)
@@ -80,46 +114,47 @@ namespace battle
 
         private void triggerAbility(ICharacter attacker, ICharacter defender, AttackArgs attackArgs)
         {
+            // TODO Check that we're in Battle state!
+            // or restirt this to an object that is around during a battle state
+
             BattleCalculator.resolveAttack(attacker, defender, attackArgs);
             battleView.updateView(playerModel, enemyModel);
 
-            if (playerModel.isDead() && enemyModel.isDead())
-            {
-                drawBattle();
+            if (playerModel.isDead() || enemyModel.isDead())
+                endBattle();
+            
+        }
+
+        private void endBattle()
+        {
+            Messenger.Broadcast(BattleEvent.END_BATTLE);
+            enemyAI = null;
+
+            //TODO make sure this is not called multiple times
+
+            if (playerModel.isDead()) {
+                battleView.defeat();
             }
-            else if (enemyModel.isDead())
-            {
-                winBattle();
+            else if (enemyModel.isDead()) {
+                battleView.victory();
             }
-            else if (playerModel.isDead())
-            {
-                loseBattle();
-            } 
         }
 
-        private void winBattle()
+        private void leaveBattleVictorious()
         {
-            Debug.Log("Win Battle");
-            //SendMessageUpwards(MsgID.BATTLE_END_VICTORY);
+            leaveBattle();
         }
 
-        private void loseBattle()
+        private void leaveBattleDefeated()
         {
-            Debug.Log("Lose Battle");
-            //SendMessageUpwards(MsgID.BATTLE_END_DEFEAT);
+            leaveBattle();
         }
 
-        private void drawBattle()
+        private void leaveBattle()
         {
-            Debug.Log("Draw");
-            //SendMessageUpwards(MsgID.BATTLE_END_DRAW);
+            // Clean Up and reset Everything
+            Destroy(battleView.gameObject);
+            enemyAI = null;
         }
-
-        public void OnLeaveBattle()
-        {
-            if (battleView)
-                Destroy(battleView.gameObject);
-        }
-
     }
 }

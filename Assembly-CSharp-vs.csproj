@@ -1,163 +1,175 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>10.0.20506</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{A9866CDD-ACF5-A59D-E1F8-1F5E5BA54795}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>
-    </RootNamespace>
-    <AssemblyName>Assembly-CSharp</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <BaseDirectory>Assets</BaseDirectory>
+	<Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+	<Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+	<ProductVersion>10.0.20506</ProductVersion>
+	<SchemaVersion>2.0</SchemaVersion>
+	<ProjectGuid>{A9866CDD-ACF5-A59D-E1F8-1F5E5BA54795}</ProjectGuid>
+	<OutputType>Library</OutputType>
+	<AppDesignerFolder>Properties</AppDesignerFolder>
+	<RootNamespace></RootNamespace>
+	<AssemblyName>Assembly-CSharp</AssemblyName>
+	<TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+	<FileAlignment>512</FileAlignment>
+	<BaseDirectory>Assets</BaseDirectory>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>Temp\bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE;UNITY_5_0_0;UNITY_5_0;UNITY_5;ENABLE_LICENSE_RENAME;ENABLE_NEW_BUGREPORTER;ENABLE_2D_PHYSICS;ENABLE_4_6_FEATURES;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_FRAME_DEBUGGER;ENABLE_GENERICS;ENABLE_HOME_SCREEN;ENABLE_IMAGEEFFECTS;ENABLE_LIGHT_PROBES_LEGACY;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_NEW_HIERARCHY;ENABLE_PHYSICS;ENABLE_PHYSICS_PHYSX3;ENABLE_PLUGIN_INSPECTOR;ENABLE_SHADOWS;ENABLE_SINGLE_INSTANCE_BUILD_SETTING;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_UNITYEVENTS;ENABLE_WEBCAM;ENABLE_WWW;ENABLE_AUDIOMIXER_SUSPEND;ENABLE_NONPRO;INCLUDE_DYNAMIC_GI;INCLUDE_GI;INCLUDE_IL2CPP;PLATFORM_SUPPORTS_MONO;RENDER_SOFTWARE_CURSOR;UNITY_ANDROID;UNITY_ANDROID_API;ENABLE_SUBSTANCE;ENABLE_TEXTUREID_MAP;ENABLE_EGL;ENABLE_NETWORK;ENABLE_RUNTIME_GI;ENABLE_MONO;ENABLE_PROFILER;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_WIN</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <NoWarn>0169</NoWarn>
+	<DebugSymbols>true</DebugSymbols>
+	<DebugType>full</DebugType>
+	<Optimize>false</Optimize>
+	<OutputPath>Temp\bin\Debug\</OutputPath>
+	<DefineConstants>DEBUG;TRACE;UNITY_5_0_0;UNITY_5_0;UNITY_5;ENABLE_LICENSE_RENAME;ENABLE_NEW_BUGREPORTER;ENABLE_2D_PHYSICS;ENABLE_4_6_FEATURES;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_FRAME_DEBUGGER;ENABLE_GENERICS;ENABLE_HOME_SCREEN;ENABLE_IMAGEEFFECTS;ENABLE_LIGHT_PROBES_LEGACY;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_NEW_HIERARCHY;ENABLE_PHYSICS;ENABLE_PHYSICS_PHYSX3;ENABLE_PLUGIN_INSPECTOR;ENABLE_SHADOWS;ENABLE_SINGLE_INSTANCE_BUILD_SETTING;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_UNITYEVENTS;ENABLE_WEBCAM;ENABLE_WWW;ENABLE_AUDIOMIXER_SUSPEND;ENABLE_NONPRO;INCLUDE_DYNAMIC_GI;INCLUDE_GI;INCLUDE_IL2CPP;PLATFORM_SUPPORTS_MONO;RENDER_SOFTWARE_CURSOR;UNITY_ANDROID;UNITY_ANDROID_API;ENABLE_SUBSTANCE;ENABLE_TEXTUREID_MAP;ENABLE_EGL;ENABLE_NETWORK;ENABLE_RUNTIME_GI;ENABLE_MONO;ENABLE_PROFILER;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_WIN</DefineConstants>
+	<ErrorReport>prompt</ErrorReport>
+	<WarningLevel>4</WarningLevel>
+	<NoWarn>0169</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>Temp\bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <NoWarn>0169</NoWarn>
+	<DebugType>pdbonly</DebugType>
+	<Optimize>true</Optimize>
+	<OutputPath>Temp\bin\Release\</OutputPath>
+	<DefineConstants>TRACE</DefineConstants>
+	<ErrorReport>prompt</ErrorReport>
+	<WarningLevel>4</WarningLevel>
+	<NoWarn>0169</NoWarn>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="System" />
+	<Reference Include="System" />
     <Reference Include="System.XML" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="UnityEngine">
-      <HintPath>E:/Programs/Unity/Editor/Data/Managed/UnityEngine.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEditor">
-      <HintPath>E:/Programs/Unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
-    </Reference>
+	<Reference Include="System.Core" />
+	<Reference Include="System.Xml.Linq" />
+	<Reference Include="UnityEngine">
+	  <HintPath>E:/Programs/Unity/Editor/Data/Managed/UnityEngine.dll</HintPath>
+	</Reference>
+	<Reference Include="UnityEditor">
+	  <HintPath>E:/Programs/Unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
+	</Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\scripts\Plugins\GoKit\Go.cs" />
-    <Compile Include="Assets\scripts\Plugins\GoKit\GoDummyPath.cs" />
-    <Compile Include="Assets\scripts\Plugins\GoKit\GoTween.cs" />
-    <Compile Include="Assets\scripts\Plugins\GoKit\GoTweenChain.cs" />
-    <Compile Include="Assets\scripts\Plugins\GoKit\GoTweenCollectionConfig.cs" />
-    <Compile Include="Assets\scripts\Plugins\GoKit\GoTweenConfig.cs" />
-    <Compile Include="Assets\scripts\Plugins\GoKit\GoTweenFlow.cs" />
-    <Compile Include="Assets\scripts\Plugins\GoKit\base\AbstractGoTween.cs" />
-    <Compile Include="Assets\scripts\Plugins\GoKit\base\AbstractGoTweenCollection.cs" />
-    <Compile Include="Assets\scripts\Plugins\GoKit\easing\GoEaseBack.cs" />
-    <Compile Include="Assets\scripts\Plugins\GoKit\easing\GoEaseBounce.cs" />
-    <Compile Include="Assets\scripts\Plugins\GoKit\easing\GoEaseCircular.cs" />
-    <Compile Include="Assets\scripts\Plugins\GoKit\easing\GoEaseCubic.cs" />
-    <Compile Include="Assets\scripts\Plugins\GoKit\easing\GoEaseElastic.cs" />
-    <Compile Include="Assets\scripts\Plugins\GoKit\easing\GoEaseExponential.cs" />
-    <Compile Include="Assets\scripts\Plugins\GoKit\easing\GoEaseLinear.cs" />
-    <Compile Include="Assets\scripts\Plugins\GoKit\easing\GoEaseQuadratic.cs" />
-    <Compile Include="Assets\scripts\Plugins\GoKit\easing\GoEaseQuartic.cs" />
-    <Compile Include="Assets\scripts\Plugins\GoKit\easing\GoEaseQuintic.cs" />
-    <Compile Include="Assets\scripts\Plugins\GoKit\easing\GoEaseSinusoidal.cs" />
-    <Compile Include="Assets\scripts\Plugins\GoKit\enums\GoDuplicatePropertyRuleType.cs" />
-    <Compile Include="Assets\scripts\Plugins\GoKit\enums\GoEaseType.cs" />
-    <Compile Include="Assets\scripts\Plugins\GoKit\enums\GoLogLevel.cs" />
-    <Compile Include="Assets\scripts\Plugins\GoKit\enums\GoLookAtType.cs" />
-    <Compile Include="Assets\scripts\Plugins\GoKit\enums\GoLoopType.cs" />
-    <Compile Include="Assets\scripts\Plugins\GoKit\enums\GoShakeType.cs" />
-    <Compile Include="Assets\scripts\Plugins\GoKit\enums\GoSplineType.cs" />
-    <Compile Include="Assets\scripts\Plugins\GoKit\enums\GoTweenState.cs" />
-    <Compile Include="Assets\scripts\Plugins\GoKit\enums\GoUpdateType.cs" />
-    <Compile Include="Assets\scripts\Plugins\GoKit\extensions\GoKitTweenExtensions.cs" />
-    <Compile Include="Assets\scripts\Plugins\GoKit\properties\GoTweenUtils.cs" />
-    <Compile Include="Assets\scripts\Plugins\GoKit\properties\abstracts\AbstractColorTweenProperty.cs" />
-    <Compile Include="Assets\scripts\Plugins\GoKit\properties\abstracts\AbstractQuaternionTweenProperty.cs" />
-    <Compile Include="Assets\scripts\Plugins\GoKit\properties\abstracts\AbstractTweenProperty.cs" />
-    <Compile Include="Assets\scripts\Plugins\GoKit\properties\abstracts\AbstractVector3TweenProperty.cs" />
-    <Compile Include="Assets\scripts\Plugins\GoKit\properties\genericTypes\ColorTweenProperty.cs" />
-    <Compile Include="Assets\scripts\Plugins\GoKit\properties\genericTypes\FloatTweenProperty.cs" />
-    <Compile Include="Assets\scripts\Plugins\GoKit\properties\genericTypes\IGenericProperty.cs" />
-    <Compile Include="Assets\scripts\Plugins\GoKit\properties\genericTypes\IntTweenProperty.cs" />
-    <Compile Include="Assets\scripts\Plugins\GoKit\properties\genericTypes\Vector2TweenProperty.cs" />
-    <Compile Include="Assets\scripts\Plugins\GoKit\properties\genericTypes\Vector3PathTweenProperty.cs" />
-    <Compile Include="Assets\scripts\Plugins\GoKit\properties\genericTypes\Vector3TweenProperty.cs" />
-    <Compile Include="Assets\scripts\Plugins\GoKit\properties\genericTypes\Vector3XTweenProperty.cs" />
-    <Compile Include="Assets\scripts\Plugins\GoKit\properties\genericTypes\Vector3YTweenProperty.cs" />
-    <Compile Include="Assets\scripts\Plugins\GoKit\properties\genericTypes\Vector3ZTweenProperty.cs" />
-    <Compile Include="Assets\scripts\Plugins\GoKit\properties\genericTypes\Vector4TweenProperty.cs" />
-    <Compile Include="Assets\scripts\Plugins\GoKit\properties\smoothing\GoSmoothedQuaternion.cs" />
-    <Compile Include="Assets\scripts\Plugins\GoKit\properties\smoothing\GoSmoothedVector3.cs" />
-    <Compile Include="Assets\scripts\Plugins\GoKit\properties\smoothing\GoSmoothingType.cs" />
-    <Compile Include="Assets\scripts\Plugins\GoKit\properties\specificTypes\EulerAnglesTweenProperty.cs" />
-    <Compile Include="Assets\scripts\Plugins\GoKit\properties\specificTypes\MaterialColorTweenProperty.cs" />
-    <Compile Include="Assets\scripts\Plugins\GoKit\properties\specificTypes\PositionPathTweenProperty.cs" />
-    <Compile Include="Assets\scripts\Plugins\GoKit\properties\specificTypes\PositionTweenProperty.cs" />
-    <Compile Include="Assets\scripts\Plugins\GoKit\properties\specificTypes\RotationQuaternionTweenProperty.cs" />
-    <Compile Include="Assets\scripts\Plugins\GoKit\properties\specificTypes\RotationTweenProperty.cs" />
-    <Compile Include="Assets\scripts\Plugins\GoKit\properties\specificTypes\ScalePathTweenProperty.cs" />
-    <Compile Include="Assets\scripts\Plugins\GoKit\properties\specificTypes\ScaleTweenProperty.cs" />
-    <Compile Include="Assets\scripts\Plugins\GoKit\properties\specificTypes\ShakeTweenProperty.cs" />
-    <Compile Include="Assets\scripts\Plugins\GoKit\properties\splines\AbstractGoSplineSolver.cs" />
-    <Compile Include="Assets\scripts\Plugins\GoKit\properties\splines\GoSpline.cs" />
-    <Compile Include="Assets\scripts\Plugins\GoKit\properties\splines\GoSplineCatmullRomSolver.cs" />
-    <Compile Include="Assets\scripts\Plugins\GoKit\properties\splines\GoSplineCubicBezierSolver.cs" />
-    <Compile Include="Assets\scripts\Plugins\GoKit\properties\splines\GoSplineQuadraticBezierSolver.cs" />
-    <Compile Include="Assets\scripts\Plugins\GoKit\properties\splines\GoSplineStraightLineSolver.cs" />
-    <Compile Include="Assets\scripts\battle\BattleArgs.cs" />
-    <Compile Include="Assets\scripts\battle\BattleCalculator.cs" />
-    <Compile Include="Assets\scripts\battle\BattleManager.cs" />
-    <Compile Include="Assets\scripts\battle\BattleView.cs" />
-    <Compile Include="Assets\scripts\battle\BattleViewFactory.cs" />
-    <Compile Include="Assets\scripts\battle\attacks\AttackArgs.cs" />
-    <Compile Include="Assets\scripts\battle\queue\AbilityProgress.cs" />
-    <Compile Include="Assets\scripts\battle\queue\AbilityQueue.cs" />
-    <Compile Include="Assets\scripts\battle\queue\AbilityQueueView.cs" />
-    <Compile Include="Assets\scripts\battle\queue\MainQueueView.cs" />
-    <Compile Include="Assets\scripts\battle\queue\QueueView.cs" />
-    <Compile Include="Assets\scripts\battle\ui\Abilities.cs" />
-    <Compile Include="Assets\scripts\battle\ui\AbilityButton.cs" />
-    <Compile Include="Assets\scripts\battle\ui\BattleUIFactory.cs" />
-    <Compile Include="Assets\scripts\battle\ui\BattleUIView.cs" />
-    <Compile Include="Assets\scripts\characters\BaseCharacter.cs" />
-    <Compile Include="Assets\scripts\characters\ICharacter.cs" />
-    <Compile Include="Assets\scripts\characters\enemy\EnemyFactory.cs" />
-    <Compile Include="Assets\scripts\characters\enemy\EnemyModel.cs" />
-    <Compile Include="Assets\scripts\characters\enemy\EnemyType.cs" />
-    <Compile Include="Assets\scripts\characters\enemy\EnemyView.cs" />
-    <Compile Include="Assets\scripts\characters\player\PlayerModel.cs" />
-    <Compile Include="Assets\scripts\characters\player\PlayerView.cs" />
-    <Compile Include="Assets\scripts\common\OldRoomView.cs" />
-    <Compile Include="Assets\scripts\config\MsgID.cs" />
-    <Compile Include="Assets\scripts\config\Positions.cs" />
-    <Compile Include="Assets\scripts\config\Timing.cs" />
-    <Compile Include="Assets\scripts\dungeon\DungeonFactory.cs" />
-    <Compile Include="Assets\scripts\dungeon\DungeonManager.cs" />
-    <Compile Include="Assets\scripts\dungeon\DungeonModel.cs" />
-    <Compile Include="Assets\scripts\dungeon\DungeonView.cs" />
-    <Compile Include="Assets\scripts\dungeon\room\RoomFactory.cs" />
-    <Compile Include="Assets\scripts\dungeon\room\RoomModel.cs" />
-    <Compile Include="Assets\scripts\dungeon\room\RoomType.cs" />
-    <Compile Include="Assets\scripts\dungeon\room\RoomView.cs" />
-    <Compile Include="Assets\scripts\game\GameManager.cs" />
-    <Compile Include="Assets\scripts\input\MiniGestureRecognizer.cs" />
-    <Compile Include="Assets\scripts\input\MiniKeypressRecognizer.cs" />
-    <Compile Include="Assets\scripts\town\TownManager.cs" />
-    <Compile Include="Assets\scripts\town\TownView.cs" />
-    <Compile Include="Assets\scripts\ui\ButtonView.cs" />
-    <Compile Include="Assets\scripts\ui\InteractableBase.cs" />
-    <Compile Include="Assets\scripts\util\Messenger.cs" />
-    <None Include="Assets\scripts\Plugins\GoKit\easing\easeEquationsLicense.txt" />
-    <Reference Include="UnityEngine.UI">
-      <HintPath>E:/Programs/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
-    </Reference>
+     <Compile Include="Assets\scripts\Plugins\GoKit\Go.cs" />
+     <Compile Include="Assets\scripts\Plugins\GoKit\GoDummyPath.cs" />
+     <Compile Include="Assets\scripts\Plugins\GoKit\GoTween.cs" />
+     <Compile Include="Assets\scripts\Plugins\GoKit\GoTweenChain.cs" />
+     <Compile Include="Assets\scripts\Plugins\GoKit\GoTweenCollectionConfig.cs" />
+     <Compile Include="Assets\scripts\Plugins\GoKit\GoTweenConfig.cs" />
+     <Compile Include="Assets\scripts\Plugins\GoKit\GoTweenFlow.cs" />
+     <Compile Include="Assets\scripts\Plugins\GoKit\base\AbstractGoTween.cs" />
+     <Compile Include="Assets\scripts\Plugins\GoKit\base\AbstractGoTweenCollection.cs" />
+     <Compile Include="Assets\scripts\Plugins\GoKit\easing\GoEaseBack.cs" />
+     <Compile Include="Assets\scripts\Plugins\GoKit\easing\GoEaseBounce.cs" />
+     <Compile Include="Assets\scripts\Plugins\GoKit\easing\GoEaseCircular.cs" />
+     <Compile Include="Assets\scripts\Plugins\GoKit\easing\GoEaseCubic.cs" />
+     <Compile Include="Assets\scripts\Plugins\GoKit\easing\GoEaseElastic.cs" />
+     <Compile Include="Assets\scripts\Plugins\GoKit\easing\GoEaseExponential.cs" />
+     <Compile Include="Assets\scripts\Plugins\GoKit\easing\GoEaseLinear.cs" />
+     <Compile Include="Assets\scripts\Plugins\GoKit\easing\GoEaseQuadratic.cs" />
+     <Compile Include="Assets\scripts\Plugins\GoKit\easing\GoEaseQuartic.cs" />
+     <Compile Include="Assets\scripts\Plugins\GoKit\easing\GoEaseQuintic.cs" />
+     <Compile Include="Assets\scripts\Plugins\GoKit\easing\GoEaseSinusoidal.cs" />
+     <Compile Include="Assets\scripts\Plugins\GoKit\enums\GoDuplicatePropertyRuleType.cs" />
+     <Compile Include="Assets\scripts\Plugins\GoKit\enums\GoEaseType.cs" />
+     <Compile Include="Assets\scripts\Plugins\GoKit\enums\GoLogLevel.cs" />
+     <Compile Include="Assets\scripts\Plugins\GoKit\enums\GoLookAtType.cs" />
+     <Compile Include="Assets\scripts\Plugins\GoKit\enums\GoLoopType.cs" />
+     <Compile Include="Assets\scripts\Plugins\GoKit\enums\GoShakeType.cs" />
+     <Compile Include="Assets\scripts\Plugins\GoKit\enums\GoSplineType.cs" />
+     <Compile Include="Assets\scripts\Plugins\GoKit\enums\GoTweenState.cs" />
+     <Compile Include="Assets\scripts\Plugins\GoKit\enums\GoUpdateType.cs" />
+     <Compile Include="Assets\scripts\Plugins\GoKit\extensions\GoKitTweenExtensions.cs" />
+     <Compile Include="Assets\scripts\Plugins\GoKit\properties\GoTweenUtils.cs" />
+     <Compile Include="Assets\scripts\Plugins\GoKit\properties\abstracts\AbstractColorTweenProperty.cs" />
+     <Compile Include="Assets\scripts\Plugins\GoKit\properties\abstracts\AbstractQuaternionTweenProperty.cs" />
+     <Compile Include="Assets\scripts\Plugins\GoKit\properties\abstracts\AbstractTweenProperty.cs" />
+     <Compile Include="Assets\scripts\Plugins\GoKit\properties\abstracts\AbstractVector3TweenProperty.cs" />
+     <Compile Include="Assets\scripts\Plugins\GoKit\properties\genericTypes\ColorTweenProperty.cs" />
+     <Compile Include="Assets\scripts\Plugins\GoKit\properties\genericTypes\FloatTweenProperty.cs" />
+     <Compile Include="Assets\scripts\Plugins\GoKit\properties\genericTypes\IGenericProperty.cs" />
+     <Compile Include="Assets\scripts\Plugins\GoKit\properties\genericTypes\IntTweenProperty.cs" />
+     <Compile Include="Assets\scripts\Plugins\GoKit\properties\genericTypes\Vector2TweenProperty.cs" />
+     <Compile Include="Assets\scripts\Plugins\GoKit\properties\genericTypes\Vector3PathTweenProperty.cs" />
+     <Compile Include="Assets\scripts\Plugins\GoKit\properties\genericTypes\Vector3TweenProperty.cs" />
+     <Compile Include="Assets\scripts\Plugins\GoKit\properties\genericTypes\Vector3XTweenProperty.cs" />
+     <Compile Include="Assets\scripts\Plugins\GoKit\properties\genericTypes\Vector3YTweenProperty.cs" />
+     <Compile Include="Assets\scripts\Plugins\GoKit\properties\genericTypes\Vector3ZTweenProperty.cs" />
+     <Compile Include="Assets\scripts\Plugins\GoKit\properties\genericTypes\Vector4TweenProperty.cs" />
+     <Compile Include="Assets\scripts\Plugins\GoKit\properties\smoothing\GoSmoothedQuaternion.cs" />
+     <Compile Include="Assets\scripts\Plugins\GoKit\properties\smoothing\GoSmoothedVector3.cs" />
+     <Compile Include="Assets\scripts\Plugins\GoKit\properties\smoothing\GoSmoothingType.cs" />
+     <Compile Include="Assets\scripts\Plugins\GoKit\properties\specificTypes\EulerAnglesTweenProperty.cs" />
+     <Compile Include="Assets\scripts\Plugins\GoKit\properties\specificTypes\MaterialColorTweenProperty.cs" />
+     <Compile Include="Assets\scripts\Plugins\GoKit\properties\specificTypes\PositionPathTweenProperty.cs" />
+     <Compile Include="Assets\scripts\Plugins\GoKit\properties\specificTypes\PositionTweenProperty.cs" />
+     <Compile Include="Assets\scripts\Plugins\GoKit\properties\specificTypes\RotationQuaternionTweenProperty.cs" />
+     <Compile Include="Assets\scripts\Plugins\GoKit\properties\specificTypes\RotationTweenProperty.cs" />
+     <Compile Include="Assets\scripts\Plugins\GoKit\properties\specificTypes\ScalePathTweenProperty.cs" />
+     <Compile Include="Assets\scripts\Plugins\GoKit\properties\specificTypes\ScaleTweenProperty.cs" />
+     <Compile Include="Assets\scripts\Plugins\GoKit\properties\specificTypes\ShakeTweenProperty.cs" />
+     <Compile Include="Assets\scripts\Plugins\GoKit\properties\splines\AbstractGoSplineSolver.cs" />
+     <Compile Include="Assets\scripts\Plugins\GoKit\properties\splines\GoSpline.cs" />
+     <Compile Include="Assets\scripts\Plugins\GoKit\properties\splines\GoSplineCatmullRomSolver.cs" />
+     <Compile Include="Assets\scripts\Plugins\GoKit\properties\splines\GoSplineCubicBezierSolver.cs" />
+     <Compile Include="Assets\scripts\Plugins\GoKit\properties\splines\GoSplineQuadraticBezierSolver.cs" />
+     <Compile Include="Assets\scripts\Plugins\GoKit\properties\splines\GoSplineStraightLineSolver.cs" />
+     <Compile Include="Assets\scripts\battle\BattleArgs.cs" />
+     <Compile Include="Assets\scripts\battle\BattleCalculator.cs" />
+     <Compile Include="Assets\scripts\battle\BattleEvent.cs" />
+     <Compile Include="Assets\scripts\battle\BattleManager.cs" />
+     <Compile Include="Assets\scripts\battle\BattleView.cs" />
+     <Compile Include="Assets\scripts\battle\BattleViewFactory.cs" />
+     <Compile Include="Assets\scripts\battle\attacks\AttackArgs.cs" />
+     <Compile Include="Assets\scripts\battle\queue\AbilityProgress.cs" />
+     <Compile Include="Assets\scripts\battle\queue\AbilityQueue.cs" />
+     <Compile Include="Assets\scripts\battle\queue\AbilityQueueView.cs" />
+     <Compile Include="Assets\scripts\battle\queue\EnemyQueue.cs" />
+     <Compile Include="Assets\scripts\battle\queue\MainQueueView.cs" />
+     <Compile Include="Assets\scripts\battle\queue\PlayerQueue.cs" />
+     <Compile Include="Assets\scripts\battle\queue\QueueView.cs" />
+     <Compile Include="Assets\scripts\battle\ui\Abilities.cs" />
+     <Compile Include="Assets\scripts\battle\ui\AbilityButton.cs" />
+     <Compile Include="Assets\scripts\battle\ui\BattleUIEvents.cs" />
+     <Compile Include="Assets\scripts\battle\ui\BattleUIFactory.cs" />
+     <Compile Include="Assets\scripts\battle\ui\BattleUIView.cs" />
+     <Compile Include="Assets\scripts\battle\ui\DefeatPopup.cs" />
+     <Compile Include="Assets\scripts\battle\ui\VictoryPopup.cs" />
+     <Compile Include="Assets\scripts\characters\BaseCharacter.cs" />
+     <Compile Include="Assets\scripts\characters\ICharacter.cs" />
+     <Compile Include="Assets\scripts\characters\ai\EnemyAI.cs" />
+     <Compile Include="Assets\scripts\characters\ai\EnemyAIEvent.cs" />
+     <Compile Include="Assets\scripts\characters\enemy\EnemyFactory.cs" />
+     <Compile Include="Assets\scripts\characters\enemy\EnemyModel.cs" />
+     <Compile Include="Assets\scripts\characters\enemy\EnemyType.cs" />
+     <Compile Include="Assets\scripts\characters\enemy\EnemyView.cs" />
+     <Compile Include="Assets\scripts\characters\player\PlayerModel.cs" />
+     <Compile Include="Assets\scripts\characters\player\PlayerView.cs" />
+     <Compile Include="Assets\scripts\common\OldRoomView.cs" />
+     <Compile Include="Assets\scripts\config\MsgID.cs" />
+     <Compile Include="Assets\scripts\config\Positions.cs" />
+     <Compile Include="Assets\scripts\config\Timing.cs" />
+     <Compile Include="Assets\scripts\dungeon\DungeonEvent.cs" />
+     <Compile Include="Assets\scripts\dungeon\DungeonFactory.cs" />
+     <Compile Include="Assets\scripts\dungeon\DungeonManager.cs" />
+     <Compile Include="Assets\scripts\dungeon\DungeonModel.cs" />
+     <Compile Include="Assets\scripts\dungeon\DungeonView.cs" />
+     <Compile Include="Assets\scripts\dungeon\room\RoomFactory.cs" />
+     <Compile Include="Assets\scripts\dungeon\room\RoomModel.cs" />
+     <Compile Include="Assets\scripts\dungeon\room\RoomType.cs" />
+     <Compile Include="Assets\scripts\dungeon\room\RoomView.cs" />
+     <Compile Include="Assets\scripts\game\GameEvent.cs" />
+     <Compile Include="Assets\scripts\game\GameManager.cs" />
+     <Compile Include="Assets\scripts\input\MiniGestureRecognizer.cs" />
+     <Compile Include="Assets\scripts\input\MiniKeypressRecognizer.cs" />
+     <Compile Include="Assets\scripts\scriptableObjects\First.cs" />
+     <Compile Include="Assets\scripts\scriptableObjects\Second.cs" />
+     <Compile Include="Assets\scripts\town\TownEvent.cs" />
+     <Compile Include="Assets\scripts\town\TownManager.cs" />
+     <Compile Include="Assets\scripts\town\TownView.cs" />
+     <Compile Include="Assets\scripts\ui\ButtonView.cs" />
+     <Compile Include="Assets\scripts\ui\InteractableBase.cs" />
+     <Compile Include="Assets\scripts\util\Messenger.cs" />
+     <None Include="Assets\scripts\Plugins\GoKit\easing\easeEquationsLicense.txt" />
+ <Reference Include="UnityEngine.UI">
+ <HintPath>E:/Programs/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
+ </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -167,4 +179,5 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  
 </Project>

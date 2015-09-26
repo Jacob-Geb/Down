@@ -13,9 +13,9 @@ namespace config
         }
 
         public static Vector2 NONE = Vector2.zero;
-        public static Vector2 UP_VEC = new Vector2(0, -1);
+        public static Vector2 UP_VEC = new Vector2(0, 1);
         public static Vector2 RIGHT_VEC = new Vector2(1, 0);
-        public static Vector2 DOWN_VEC = new Vector2(0, 1);
+        public static Vector2 DOWN_VEC = new Vector2(0, -1);
         public static Vector2 LEFT_VEC = new Vector2(-1, 0);
 
         public static Vector2 fromDir(Dir direction)
@@ -36,6 +36,27 @@ namespace config
                 default:
                     throw new Exception("No valid dir");
             }
+        }
+
+        public static Dir opposite(Dir direction)
+        {
+            switch (direction)
+            {
+                case Dir.NONE:
+                    return Dir.NONE;
+                case Dir.UP:
+                    return Dir.DOWN;
+                case Dir.RIGHT:
+                    return Dir.LEFT;
+                case Dir.DOWN:
+                    return Dir.UP;
+                case Dir.LEFT:
+                    return Dir.RIGHT;
+
+                default:
+                    throw new Exception("No valid dir");
+            }
+
         }
         
     }

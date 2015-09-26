@@ -5,39 +5,44 @@ using UnityEngine;
 
 namespace battle.queue
 {
-    class AbilityQueue : MonoBehaviour
+    [Serializable]
+    public abstract class AbilityQueue : ScriptableObject
     {
-        private int maxAbilities;
-        private List<AbilityProgress> abilities = new List<AbilityProgress>();
-        private AbilityQueueView queueView;
+        protected int maxAbilities;
+        protected bool queueActive;
+
+        protected List<AbilityProgress> abilities = new List<AbilityProgress>();
+        protected AbilityQueueView queueView;
+
         public Action<AttackArgs> triggerDelegate;
 
-        public static string TRY_CANCEL_ABILITY = "tryCancelAbility";
-
-        private void Start()
+        protected virtual void OnEnable()
         {
-            queueView = GetComponent<AbilityQueueView>();
+            Messenger.AddListener(BattleEvent.END_BATTLE, onBattleEnd);
         }
 
-        public void init(Action<AttackArgs> callback, int maxAbilities = 3)
+        protected virtual void OnDisable()
+        {
+            Messenger.AddListener(BattleEvent.END_BATTLE, onBattleEnd);
+        }
+
+        public virtual void init(Action<AttackArgs> callback, AbilityQueueView queueView, int maxAbilities)
         {
             this.triggerDelegate = callback;
+            this.queueView = queueView;
             this.maxAbilities = maxAbilities;
+            queueActive = true;
         }
 
-        void OnEnable()
+        protected virtual void onBattleEnd()
         {
-            Messenger<AttackArgs>.AddListener(BattleView.ABILITY_PRESS, tryAddAbility);
-            Messenger<int>.AddListener(TRY_CANCEL_ABILITY, remove);
+            queueActive = false;
+            for (int i = 0; i < abilities.Count; i++) {
+                remove(0);
+            }
         }
 
-        void OnDisable()
-        {
-            Messenger<AttackArgs>.RemoveListener(BattleView.ABILITY_PRESS, tryAddAbility);
-            Messenger<int>.RemoveListener(TRY_CANCEL_ABILITY, remove);
-        }
-
-        void Update()
+        public void updateQueue()
         {
             if (abilities.Count >= 1)
             {
@@ -45,39 +50,44 @@ namespace battle.queue
                 if (abilities[0].ready)
                 {
                     triggerActive();
-               } 
+                }
             }
         }
 
-        private void tryAddAbility(AttackArgs args)
+        protected void tryAddAbility(AttackArgs args)
         {
-            if (abilities.Count < maxAbilities)
+            if (queueActive && abilities.Count < maxAbilities)
             {
                 abilities.Add(new AbilityProgress(args));
                 queueView.updateView(abilities);
             }
         }
 
-        private void remove(int id)
+        protected void remove(int id)
         {
-            if (abilities.Count >= id && id >= 0)
+            if (abilities.Count > 0)
             {
-                abilities.RemoveAt(id);
-                queueView.updateView(abilities);
-            }
-            else
-            {
-                Debug.LogWarning("FAIL!!");
+                if (abilities.Count >= id && id >= 0)
+                {
+                    abilities.RemoveAt(id);
+                    queueView.updateView(abilities);
+                }
             }
         }
 
-        private void triggerActive( )
+        protected void triggerActive()
         {
             if (triggerDelegate != null)
+            {
                 triggerDelegate(abilities[0].args);
+            }
+
 
             remove(0);
         }
+
+        
+
 
     }
 }

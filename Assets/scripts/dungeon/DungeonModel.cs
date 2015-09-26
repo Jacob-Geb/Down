@@ -34,7 +34,10 @@ namespace dungeon
                     return rooms[i];
                 }
             }
-            throw new Exception("no room at that position");
+
+            return null;
+            // return nullRoom?
+            //throw new Exception("no room at that position");
         }
 
         public void resetDungeon()
@@ -49,7 +52,7 @@ namespace dungeon
             // room factory will be hooked u the the dungeon level, etc
             rooms.Add(new RoomModel(new Vector2(0, 0), true));
             rooms.Add(new RoomModel(new Vector2(1, 0)));
-            rooms.Add(new RoomModel(new Vector2(1, 1), false, true));
+            rooms.Add(new RoomModel(new Vector2(1, -1), false, true));
 
             rooms[0].roomType = 1;
             rooms[1].roomType = 2;
@@ -76,6 +79,14 @@ namespace dungeon
             if (currentRoom != null)
                 return currentRoom.getEnemy();
             throw new Exception("no currentRoom");
+        }
+
+        public void leaveBattleVictorious()
+        {
+            if (currentRoom != null)
+            {
+                currentRoom.killEnemy();
+            }
         }
 
 

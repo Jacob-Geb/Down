@@ -15,11 +15,14 @@ namespace battle
         [SerializeField]
         public GameObject battleViewObj;
 
+        [SerializeField]
+        public GameObject victoryPopupObj;
+        [SerializeField]
+        public GameObject defeatPopupObj;
+
         private PlayerView playerView;
         private EnemyView enemyView;
         private BattleUIView battleUIView;
-
-        public static string ABILITY_PRESS = "abilityPress";
 
         public void initBattle(PlayerModel player, EnemyModel enemy)
         {
@@ -31,6 +34,30 @@ namespace battle
             battleUIView.init(player);
 
             updateView(player, enemy);
+        }
+
+        public void victory( )
+        {
+            GameObject popup = GameObject.Instantiate(victoryPopupObj) as GameObject;
+            popup.transform.SetParent(transform);
+            popup.transform.localScale = Vector3.one;
+            popup.transform.localPosition = Vector3.zero;
+            removeUI();
+        }
+
+        public void defeat()
+        {
+            GameObject popup = GameObject.Instantiate(defeatPopupObj) as GameObject;
+            popup.transform.SetParent(transform);
+            popup.transform.localScale = Vector3.one;
+            popup.transform.localPosition = Vector3.zero;
+            removeUI();
+        }
+
+        private void removeUI()
+        {
+            if (battleUIView != null)
+                Destroy(battleUIView.gameObject);
         }
 
         private void instantiateViews()

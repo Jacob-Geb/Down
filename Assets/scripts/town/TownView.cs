@@ -2,37 +2,36 @@
 using System;
 using config;
 using UnityEngine;
+using Dungeon;
 
-public class TownView : MonoBehaviour {
-
-    public Button dungeonBtn;
-
-
-    void Start()
+namespace town
+{
+    public class TownView : MonoBehaviour
     {
-        try
+
+        public Button dungeonBtn;
+
+
+        void Start()
         {
-            dungeonBtn.onClick.AddListener(onDungeonClick);
+            try
+            {
+                dungeonBtn.onClick.AddListener(onDungeonClick);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
         }
-        catch (Exception e)
+
+        void setButtonsActive(bool value)
         {
-            throw e;
+            dungeonBtn.interactable = value;
         }
-    }
 
-    void setButtonsActive(bool value)
-    {
-        dungeonBtn.interactable = value;
-    }
-
-    public void OnDescend()
-    {
-        setButtonsActive(false);
-        Destroy(gameObject);
-    }
-
-    public void onDungeonClick()
-    {
-        SendMessageUpwards(MsgID.TRY_ENTER_DUNGEON);
+        public void onDungeonClick()
+        {
+            Messenger.Broadcast(DungeonEvent.TRY_ENTER_DUNGEON);
+        }
     }
 }

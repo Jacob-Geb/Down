@@ -9,7 +9,8 @@ public class MiniKeypressRecognizer : MonoBehaviour
 
     private void Start()
     {
-#if UNITY_IOS || UNITY_ANDROID
+#if (UNITY_IOS || UNITY_ANDROID) && !UNITY_EDITOR
+        Debug.Log( "destroyed");
         Destroy(this);
 #endif
     }

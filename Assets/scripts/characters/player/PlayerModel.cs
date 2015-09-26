@@ -7,12 +7,10 @@ namespace characters.player
 
         // left hand
         // right hand
-
         // body
-        
         // consumables & useables
+        // pasives
 
-        // pasives 
         public PlayerModel()//args
         {
             resetPlayer();

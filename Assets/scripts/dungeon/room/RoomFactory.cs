@@ -9,9 +9,8 @@ namespace dungeon.room
 {
     class RoomFactory
     {
-        
 
-        public static  RoomView makeRoom(RoomModel model, Transform cont)
+        public static RoomView makeRoom(RoomModel model, Transform cont, bool enableRoom)
         {
             string resourceID = "dungeon/rooms/RoomCellar" + model.roomType;
             GameObject room = GameObject.Instantiate(Resources.Load(resourceID, typeof(GameObject))) as GameObject;
@@ -20,6 +19,7 @@ namespace dungeon.room
             room.transform.localPosition = Vector3.zero;
 
             RoomView roomView = room.GetComponent<RoomView>();
+            roomView.roomeEnabled = enableRoom;
             return roomView;
         }
     }
