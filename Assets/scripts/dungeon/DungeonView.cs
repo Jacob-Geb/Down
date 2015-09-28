@@ -24,12 +24,13 @@ namespace dungeon.room
         {
             if (currentRoom)
                 Destroy(currentRoom.gameObject);
-            currentRoom = makeCurrent(model, true);
+            currentRoom = makeCurrent(model);
+            currentRoom.roomeEnabled = true;
         }
 
-        private RoomView makeCurrent(RoomModel model, bool enableRoom = false)
+        private RoomView makeCurrent(RoomModel model)
         {
-            return RoomFactory.makeRoom(model, transform, enableRoom);
+            return RoomFactory.makeRoom(model, transform);
         }
 
     }

@@ -10,6 +10,7 @@ namespace dungeon.room
 
         public int roomType;
         public EnemyType enemyType;
+        public bool[] walls;
 
         public RoomModel(Vector2 pos, bool isStart = false, bool isEnd = false, EnemyType enemyType = EnemyType.NONE)
         {

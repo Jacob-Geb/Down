@@ -79,10 +79,12 @@ public class
         dungeonModel.generateDungeon();
         
         dungeonView = DungeonFactory.makeDungeonView(transform);
-
-        Debug.Log(dungeonView);
-        Debug.Log(dungeonModel);
         dungeonView.generateDungeon(dungeonModel);
+
+        //GameObject cover = Instantiate(coverPrefab) as GameObject;
+        //cover.transform.SetParent(transform);
+        //cover.transform.localPosition = Vector3.zero;
+        //cover.transform.localScale = Vector3.one;
     }
 
     private void enterBattle(BattleArgs args)

@@ -7,8 +7,11 @@ using System.Collections;
 using UnityEngine;
 namespace dungeon.room
 {
-    class RoomView : MonoBehaviour 
+    class RoomView : MonoBehaviour
     {
+        private const float ROOM_WIDTH = 800;
+        private const float ROOM_HEIGHT = 620;
+
         private GameObject dungeonView;
         public bool roomeEnabled { get; set; }
 
@@ -74,8 +77,8 @@ namespace dungeon.room
         {
             roomeEnabled = false;
             Vector3 endPos = Positions.fromDir(direction);
-            endPos.x *= 800;// TODO ROOM_HEIGHT
-            endPos.y *= 640;// and width
+            endPos.x *= ROOM_WIDTH;// TODO ROOM_HEIGHT somewhere else.. or dynamic?
+            endPos.y *= ROOM_HEIGHT;// and width
 
             StartCoroutine(moveRoom(endPos, destroyOnArrive));
         }
@@ -83,8 +86,8 @@ namespace dungeon.room
         public void enterAndEnable(Dir direction)
         {
             Vector3 startOffscreen = Positions.fromDir(direction);
-            startOffscreen.x *= 800;
-            startOffscreen.y *= 640;
+            startOffscreen.x *= ROOM_WIDTH;
+            startOffscreen.y *= ROOM_HEIGHT;
 
             transform.localPosition = startOffscreen;
             StartCoroutine(moveRoom(Vector3.zero, eneableOnArrive));
@@ -98,15 +101,17 @@ namespace dungeon.room
             while (progress < duration)
             {
                 progress += Time.deltaTime;
-                transform.localPosition = Vector3.Lerp(transform.localPosition, endPos, progress/duration);
+                transform.localPosition = Vector3.Lerp(transform.localPosition, endPos, progress / duration);
                 yield return null;
             }
 
+            transform.localPosition = endPos;
             if (onComplete != null)
                 onComplete();
         }
 
-        private void destroyOnArrive (){
+        private void destroyOnArrive()
+        {
             Destroy(gameObject);
         }
 
@@ -133,6 +138,6 @@ namespace dungeon.room
         {
             tryChangeDir(Dir.UP);
         }
- 
+
     }
 }

@@ -19,7 +19,7 @@ namespace game
             playerModel = new PlayerModel();
             dungeonManager = GetComponentInChildren<DungeonManager>();
             battleManager = GetComponentInChildren<BattleManager>();
-
+            
             resetGame();
         }
 

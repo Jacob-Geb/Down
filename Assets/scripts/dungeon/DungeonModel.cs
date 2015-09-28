@@ -55,10 +55,14 @@ namespace dungeon
             rooms.Add(new RoomModel(new Vector2(1, -1), false, true));
 
             rooms[0].roomType = 1;
+            rooms[0].walls = new bool[] { true, false, true, true };
+
             rooms[1].roomType = 2;
+            rooms[1].walls = new bool[] { true, true, false, false };
             rooms[1].enemyType = EnemyType.CELLAR_RAT;
 
             rooms[2].roomType = 3;
+            rooms[2].walls = new bool[] { false, true, true, true };
             rooms[2].enemyType = EnemyType.CELLAR_GOBLIN;
 
             currentRoom = rooms[0];
