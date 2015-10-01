@@ -6,15 +6,31 @@ using game;
 using battle;
 using Dungeon;
 using characters.enemy;
+using dungeon.ui;
+using util;
+using Dungeon.room;
+using System;
 
 public class 
     DungeonManager : MonoBehaviour {
 
     public DungeonModel dungeonModel;
     private DungeonView dungeonView;
+    private DungeonUI dungeonUI;
+    private GameObject dungeonCover;
+
+    private GameObject dungeonCont;
+    private GameObject uiCont;
  
 	void Start () {
         dungeonModel = new DungeonModel();
+
+        dungeonCont = new GameObject("Dungeon");
+        dungeonCont.centerScale(transform);
+
+        uiCont = new GameObject("UI");
+        uiCont.centerScale(transform);
+
 	}
 
     void OnEnable()
@@ -25,6 +41,7 @@ public class
         Messenger<Dir>.AddListener(DungeonEvent.TRY_CHANGE_ROOM, tryChangeRoom);
         Messenger.AddListener(DungeonEvent.ENTER_DUNGEON, enterDungeon);
         Messenger.AddListener(DungeonEvent.DESCEND, descend);
+        Messenger.AddListener(RoomEvent.ENTER_ROOM, enterRoom);
     }
 
     void OnDisable()
@@ -35,6 +52,7 @@ public class
         Messenger<Dir>.RemoveListener(DungeonEvent.TRY_CHANGE_ROOM, tryChangeRoom);
         Messenger.RemoveListener(DungeonEvent.ENTER_DUNGEON, enterDungeon);
         Messenger.RemoveListener(DungeonEvent.DESCEND, descend);
+        Messenger.RemoveListener(RoomEvent.ENTER_ROOM, enterRoom);
     }
 
     private void enterDungeon()
@@ -43,6 +61,18 @@ public class
 
         dungeonModel.descend();// TODO Better name.. is this event still needed with the next line and all..
         generateDungeon();
+    }
+
+    private void enterRoom()
+    {
+        if (dungeonUI != null && dungeonModel != null && dungeonModel.currentRoom != null)
+        {
+            dungeonUI.updateUI(dungeonModel.currentRoom);
+        }
+        else
+        {
+            throw new Exception("enter room fail");
+        }
     }
 
     private void removeDungeon()
@@ -59,11 +89,10 @@ public class
 
     private void tryChangeRoom(Dir dir)
     {
-        Vector2 newRoomPos = dungeonModel.currentRoom.pos + Positions.fromDir(dir);
-        RoomModel newRoom = dungeonModel.getRoomFromPos(newRoomPos);
-
-        if (newRoom != null && dungeonModel.currentRoom.getEnemy() == EnemyType.NONE)
+        if (dungeonModel.canGo(dir))
         {
+            Vector2 newRoomPos = dungeonModel.currentRoom.pos + Positions.fromDir(dir);
+            RoomModel newRoom = dungeonModel.getRoomFromPos(newRoomPos);
             changeRoom(dir);
         }
     }
@@ -77,14 +106,17 @@ public class
     private void generateDungeon()
     {
         dungeonModel.generateDungeon();
-        
-        dungeonView = DungeonFactory.makeDungeonView(transform);
+
+        dungeonView = DungeonFactory.makeDungeonView(dungeonCont.transform);
         dungeonView.generateDungeon(dungeonModel);
 
-        //GameObject cover = Instantiate(coverPrefab) as GameObject;
-        //cover.transform.SetParent(transform);
-        //cover.transform.localPosition = Vector3.zero;
-        //cover.transform.localScale = Vector3.one;
+        dungeonCover = Instantiate(Resources.Load("dungeon/ui/cover", typeof(GameObject))) as GameObject;
+        dungeonCover.centerScale(uiCont.transform);
+
+        GameObject dungeonUIObj = GameObject.Instantiate(Resources.Load("dungeon/ui/dungeonUI", typeof(GameObject))) as GameObject;
+        dungeonUIObj.centerScale(uiCont.transform);
+        dungeonUI = dungeonUIObj.GetComponent<DungeonUI>();
+        dungeonUI.updateUI(dungeonModel.currentRoom);
     }
 
     private void enterBattle(BattleArgs args)
@@ -99,6 +131,7 @@ public class
         {
             dungeonModel.leaveBattleVictorious();
             dungeonView.updateCurrentRoom(dungeonModel.currentRoom);
+            dungeonUI.updateUI(dungeonModel.currentRoom);
             dungeonView.gameObject.SetActive(true);
         }
     }

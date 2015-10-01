@@ -52,18 +52,29 @@ namespace dungeon
             // room factory will be hooked u the the dungeon level, etc
             rooms.Add(new RoomModel(new Vector2(0, 0), true));
             rooms.Add(new RoomModel(new Vector2(1, 0)));
-            rooms.Add(new RoomModel(new Vector2(1, -1), false, true));
+            rooms.Add(new RoomModel(new Vector2(1, -1)));
+            rooms.Add(new RoomModel(new Vector2(2, -1)));
+            rooms.Add(new RoomModel(new Vector2(0, -1)));
+            rooms.Add(new RoomModel(new Vector2(0, -2)));
+            rooms.Add(new RoomModel(new Vector2(0, -3)));
+            rooms.Add(new RoomModel(new Vector2(-1, -3)));
+            rooms.Add(new RoomModel(new Vector2(1, -3), false, true));
 
-            rooms[0].roomType = 1;
             rooms[0].walls = new bool[] { true, false, true, true };
-
-            rooms[1].roomType = 2;
             rooms[1].walls = new bool[] { true, true, false, false };
-            rooms[1].enemyType = EnemyType.CELLAR_RAT;
+            rooms[2].walls = new bool[] { false, false, true, false };
+            rooms[3].walls = new bool[] { true, true, true, false };
+            rooms[4].walls = new bool[] { true, false, false, true };
+            rooms[5].walls = new bool[] { false, true, false, true };
+            rooms[6].walls = new bool[] { false, false, true, false };
+            rooms[7].walls = new bool[] { true, false, true, true };
+            rooms[8].walls = new bool[] { true, true, true, false };
 
-            rooms[2].roomType = 3;
-            rooms[2].walls = new bool[] { false, true, true, true };
-            rooms[2].enemyType = EnemyType.CELLAR_GOBLIN;
+            rooms[3].enemyType = EnemyType.CELLAR_RAT;
+            rooms[5].enemyType = EnemyType.CELLAR_RAT;
+            rooms[7].enemyType = EnemyType.CELLAR_RAT;
+
+            //rooms[1].enemyType = EnemyType.CELLAR_RAT;
 
             currentRoom = rooms[0];
         }
@@ -81,7 +92,7 @@ namespace dungeon
         public EnemyType getCurrentEnemy()
         {
             if (currentRoom != null)
-                return currentRoom.getEnemy();
+                return currentRoom.enemyType;
             throw new Exception("no currentRoom");
         }
 
@@ -93,7 +104,22 @@ namespace dungeon
             }
         }
 
+        public bool canGo(Dir dir)
+        {
+            if (currentRoom.enemyType != EnemyType.NONE)
+                return false;
 
+            if (!currentRoom.canGo(dir))
+                return false;
+
+            Vector2 newRoomPos = currentRoom.pos + Positions.fromDir(dir);
+            RoomModel newRoom = getRoomFromPos(newRoomPos);
+
+            if (newRoom == null)
+                   throw new Exception(" should not Behaviour able town get here");
+
+            return true;
+        }
 
 
     }

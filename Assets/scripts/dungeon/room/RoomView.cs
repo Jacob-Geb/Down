@@ -2,6 +2,7 @@
 using battle;
 using config;
 using Dungeon;
+using Dungeon.room;
 using System;
 using System.Collections;
 using UnityEngine;
@@ -11,6 +12,7 @@ namespace dungeon.room
     {
         private const float ROOM_WIDTH = 800;
         private const float ROOM_HEIGHT = 620;
+        private const float TRANSITION_TIME = 0.3f;
 
         private GameObject dungeonView;
         public bool roomeEnabled { get; set; }
@@ -44,21 +46,6 @@ namespace dungeon.room
         {
             if (roomeEnabled)
                 Messenger<Dir>.Broadcast(DungeonEvent.TRY_CHANGE_ROOM, keyDir);
-        }
-
-        public void triggerBattle()
-        {
-            if (roomeEnabled)
-            {
-                // take enemy from this room
-                int roomID = 10;
-                Messenger.Broadcast(BattleEvent.TRY_ENTER_BATTLE);
-            }
-        }
-
-        public void triggerCollectLoot()
-        {
-
         }
 
         public void triggerGoDescend()
@@ -96,7 +83,7 @@ namespace dungeon.room
         private IEnumerator moveRoom(Vector3 endPos, Action onComplete)
         {
             float progress = 0;
-            float duration = 0.5f;
+            float duration = TRANSITION_TIME;
 
             while (progress < duration)
             {
@@ -118,6 +105,7 @@ namespace dungeon.room
         private void eneableOnArrive()
         {
             roomeEnabled = true;
+            Messenger.Broadcast(RoomEvent.ENTER_ROOM);
         }
 
         // movement

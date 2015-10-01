@@ -1,9 +1,11 @@
-﻿using config;
+﻿using characters.enemy;
+using config;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnityEngine;
+using util;
 
 namespace dungeon.room
 {
@@ -12,14 +14,20 @@ namespace dungeon.room
 
         public static RoomView makeRoom(RoomModel model, Transform cont)
         {
-            string resourceID = "dungeon/rooms/RoomCellar" + model.roomType;
+            string resourceID = "dungeon/rooms/RoomCellar";
             GameObject room = GameObject.Instantiate(Resources.Load(resourceID, typeof(GameObject))) as GameObject;
-            centerScale(room, cont);
-
+            room.centerScale(cont);
 
             addWalls(room, model);
-            //addEnemies();
-            //addLLoot();
+
+            if (model.enemyType != EnemyType.NONE)
+            {
+                addEnemy(room);
+            }
+            else
+            {
+                // if loot? add
+            }
 
             RoomView roomView = room.GetComponent<RoomView>();
             return roomView;
@@ -40,32 +48,33 @@ namespace dungeon.room
         private static void addCeiling(GameObject room)
         {
             GameObject ceiling = GameObject.Instantiate(Resources.Load("dungeon/rooms/cellar/ceiling", typeof(GameObject))) as GameObject;
-            centerScale(ceiling, room.transform);
+            ceiling.centerScale(room.transform);
         }
 
         private static void addRightWall(GameObject room)
         {
             GameObject wall = GameObject.Instantiate(Resources.Load("dungeon/rooms/cellar/rightWall", typeof(GameObject))) as GameObject;
-            centerScale(wall, room.transform);
+            wall.centerScale(room.transform);
         }
 
         private static void addFloor(GameObject room)
         {
             GameObject floor = GameObject.Instantiate(Resources.Load("dungeon/rooms/cellar/floor", typeof(GameObject))) as GameObject;
-            centerScale(floor, room.transform);
+            floor.centerScale(room.transform);
         }
 
         private static void addLeftWall(GameObject room)
         {
             GameObject wall = GameObject.Instantiate(Resources.Load("dungeon/rooms/cellar/leftWall", typeof(GameObject))) as GameObject;
-            centerScale(wall, room.transform);
+            wall.centerScale(room.transform);
         }
 
-        private static void centerScale(GameObject obj, Transform parent)
+        private static void addEnemy(GameObject room)
         {
-            obj.transform.SetParent(parent);
-            obj.transform.localScale = Vector3.one;
-            obj.transform.localPosition = Vector3.zero;
+            // str enemyName = room.eney
+            GameObject enemy = GameObject.Instantiate(Resources.Load("dungeon/enemies/rat", typeof(GameObject))) as GameObject;
+            enemy.centerScale(room.transform);
         }
+
     }
 }
