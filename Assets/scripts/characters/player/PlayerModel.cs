@@ -1,11 +1,13 @@
 ﻿using battle.attacks;
+using equipment;
+using equipment.weapons;
 using System.Collections.Generic;
 namespace characters.player
 {
     public class PlayerModel : BaseCharacter
     {
 
-        // left hand
+        IEquipment leftHandWeapon;
         // right hand
         // body
         // consumables & useables
@@ -19,21 +21,21 @@ namespace characters.player
         public void resetPlayer()
         {
             hp = 5.0f;
+            leftHandWeapon = new Dagger();
         }
 
-        public List<AttackArgs> abilities
+        public List<AbilityCommand> abilities
         {
-            get { 
-                List<AttackArgs> abilities = new List<AttackArgs>();
+            get {
+                List<AbilityCommand> commands = new List<AbilityCommand>();
 
                 // from left
-                // reom right hand
-                // from class..
+                commands.Add(leftHandWeapon.getCommand());
 
                 // tmps
-                abilities.Add(new AttackArgs(2, 5));
+                //abilities.Add(new AttackArgs(2, 5));
 
-                return abilities;
+                return commands;
             }
         }
         

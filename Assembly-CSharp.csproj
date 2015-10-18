@@ -117,6 +117,8 @@
      <Compile Include="Assets\scripts\battle\BattleView.cs" />
      <Compile Include="Assets\scripts\battle\BattleViewFactory.cs" />
      <Compile Include="Assets\scripts\battle\attacks\AttackArgs.cs" />
+     <Compile Include="Assets\scripts\battle\commands\AbilityCommand.cs" />
+     <Compile Include="Assets\scripts\battle\commands\AttackCommand.cs" />
      <Compile Include="Assets\scripts\battle\queue\AbilityProgress.cs" />
      <Compile Include="Assets\scripts\battle\queue\AbilityQueue.cs" />
      <Compile Include="Assets\scripts\battle\queue\AbilityQueueView.cs" />
@@ -157,6 +159,8 @@
      <Compile Include="Assets\scripts\dungeon\room\RoomView.cs" />
      <Compile Include="Assets\scripts\dungeon\ui\DungeonUI.cs" />
      <Compile Include="Assets\scripts\dungeon\ui\FightButton.cs" />
+     <Compile Include="Assets\scripts\equipment\Equipment.cs" />
+     <Compile Include="Assets\scripts\equipment\weapons\Dagger.cs" />
      <Compile Include="Assets\scripts\game\GameEvent.cs" />
      <Compile Include="Assets\scripts\game\GameManager.cs" />
      <Compile Include="Assets\scripts\input\MiniGestureRecognizer.cs" />

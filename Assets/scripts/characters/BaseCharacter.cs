@@ -10,6 +10,9 @@
             }
             set{
                 _hp = value;
+                if (_hp <= 0){
+                    // TODO dispatch signal.. here or in player/enemy
+                }
             }
         }
 
