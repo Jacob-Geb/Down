@@ -31,7 +31,7 @@ namespace town
 
         public void onDungeonClick()
         {
-            Messenger.Broadcast(DungeonEvent.TRY_ENTER_DUNGEON);
+            Messenger.Broadcast(DungeonEvent.ENTER_DUNGEON);
         }
     }
 }

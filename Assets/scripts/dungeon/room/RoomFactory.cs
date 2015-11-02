@@ -1,5 +1,6 @@
 ﻿using characters.enemy;
 using config;
+using loot;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,7 @@ namespace dungeon.room
     class RoomFactory
     {
 
-        public static RoomView makeRoom(RoomModel model, Transform cont)
+        public static RoomView makeRoom(IRoom model, Transform cont)
         {
             string resourceID = "dungeon/rooms/RoomCellar";
             GameObject room = GameObject.Instantiate(Resources.Load(resourceID, typeof(GameObject))) as GameObject;
@@ -21,19 +22,15 @@ namespace dungeon.room
             addWalls(room, model);
 
             if (model.enemyType != EnemyType.NONE)
-            {
-                addEnemy(room);
-            }
-            else
-            {
-                // if loot? add
-            }
+                addEnemy(room, model.enemyType);
+            else if (model.loot.lootType != LootType.NONE)
+                addLoot(room, (Loot)model.loot);
 
             RoomView roomView = room.GetComponent<RoomView>();
             return roomView;
         }
 
-        private static void addWalls(GameObject room, RoomModel model)
+        private static void addWalls(GameObject room, IRoom model)
         {
             if (model.walls[0])
                 addCeiling(room);
@@ -69,12 +66,17 @@ namespace dungeon.room
             wall.centerScale(room.transform);
         }
 
-        private static void addEnemy(GameObject room)
+        private static void addEnemy(GameObject room, EnemyType enemyType)
         {
             // str enemyName = room.eney
             GameObject enemy = GameObject.Instantiate(Resources.Load("dungeon/enemies/rat", typeof(GameObject))) as GameObject;
             enemy.centerScale(room.transform);
         }
 
+        private static void addLoot(GameObject room, Loot loot)
+        {
+            GameObject lootObj = GameObject.Instantiate(Resources.Load("dungeon/loot/genericLoot", typeof(GameObject))) as GameObject;
+            lootObj.centerScale(room.transform);
+        }
     }
 }

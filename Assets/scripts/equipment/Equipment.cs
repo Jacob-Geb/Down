@@ -1,11 +1,15 @@
 ﻿
-using battle.attacks;
+using characters;
 namespace equipment
 {
-    abstract class Equipment
+    public abstract class Equipment
     {
-        AttackArgs attackArgs { get; }
+        public bool equiped { get; set; }
+        public Slot slot { get; protected set; }
+        public abstract string description { get; }
+        public abstract string iconPath { get; }
 
-        abstract AbilityCommand getCommand();
+        public abstract AbilityCommand getCommand(BaseCharacter actor, BaseCharacter target);
+
     }
 }

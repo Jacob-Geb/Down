@@ -4,13 +4,22 @@ using UnityEngine;
 using System.Collections.Generic;
 using config;
 using System;
+using loot;
 
 namespace dungeon
 {
     public class DungeonModel
     {
-        private List<RoomModel> rooms = new List<RoomModel>();
-        public RoomModel currentRoom = null;
+        private List<IRoom> rooms = new List<IRoom>();
+
+        private IRoom _currentRoom = NullRoom.instance;
+        public IRoom currentRoom
+        {
+            get {return _currentRoom;}
+            private set { 
+                _currentRoom = value;
+                _currentRoom.setup();
+            } }
 
         public int dungeonLevel;
 
@@ -21,11 +30,14 @@ namespace dungeon
 
         public void changeRoom(Dir direction)
         {
+            if (currentRoom != null)
+                currentRoom.teardown();
+
             var newPos = currentRoom.pos + Positions.fromDir(direction);
             currentRoom = getRoomFromPos(newPos);
         }
 
-        public RoomModel getRoomFromPos(Vector2 pos)
+        public IRoom getRoomFromPos(Vector2 pos)
         {
             for (int i = 0; i < rooms.Count; i++)
             {
@@ -74,6 +86,8 @@ namespace dungeon
             rooms[5].enemyType = EnemyType.CELLAR_RAT;
             rooms[7].enemyType = EnemyType.CELLAR_RAT;
 
+            rooms[1].loot = new Loot(LootType.DAGGER); 
+
             //rooms[1].enemyType = EnemyType.CELLAR_RAT;
 
             currentRoom = rooms[0];
@@ -82,6 +96,9 @@ namespace dungeon
         private void clearDungeon()
         {
             rooms.Clear();
+            if (currentRoom != null)
+                currentRoom.teardown();
+            currentRoom = NullRoom.instance;
         }
 
         public void descend()
@@ -113,7 +130,7 @@ namespace dungeon
                 return false;
 
             Vector2 newRoomPos = currentRoom.pos + Positions.fromDir(dir);
-            RoomModel newRoom = getRoomFromPos(newRoomPos);
+            IRoom newRoom = getRoomFromPos(newRoomPos);
 
             if (newRoom == null)
                    throw new Exception(" should not Behaviour able town get here");

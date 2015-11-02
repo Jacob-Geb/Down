@@ -5,6 +5,7 @@ using characters.enemy;
 using battle;
 using town;
 using Dungeon;
+using ui.inventory;
 
 namespace game
 {
@@ -12,33 +13,28 @@ namespace game
     {
         private PlayerModel playerModel;
         private DungeonManager dungeonManager;
-        private BattleManager battleManager;
+        private InventoryManager inventoryManager;
 
         private void Start()
         {
             playerModel = new PlayerModel();
             dungeonManager = GetComponentInChildren<DungeonManager>();
-            battleManager = GetComponentInChildren<BattleManager>();
-            
+            inventoryManager = GetComponentInChildren<InventoryManager>();
             resetGame();
         }
 
         private void OnEnable()
         {
-            Messenger.AddListener(DungeonEvent.TRY_ENTER_DUNGEON, tryEnterDungeon);
-            Messenger.AddListener(DungeonEvent.TRY_DESCEND, tryDescend);
-            Messenger.AddListener(BattleEvent.TRY_ENTER_BATTLE, tryEnterBattle);
-            Messenger.AddListener(BattleEvent.LEAVE_BATTLE_VICTORIOUS, leaveBattleVictorious);
+            Messenger.AddListener(DungeonEvent.TRY_ENTER_BATTLE, tryEnterBattle);
             Messenger.AddListener(BattleEvent.LEAVE_BATTLE_DEFEATED, leaveBattleDefeated);
+            Messenger.AddListener(InventoryEvent.OPEN_INVENTORY, openInventory);
         }
 
         private void OnDisable()
         {
-            Messenger.RemoveListener(DungeonEvent.TRY_ENTER_DUNGEON, tryEnterDungeon);
-            Messenger.RemoveListener(DungeonEvent.TRY_DESCEND, tryDescend);
-            Messenger.RemoveListener(BattleEvent.TRY_ENTER_BATTLE, tryEnterBattle);
-            Messenger.RemoveListener(BattleEvent.LEAVE_BATTLE_VICTORIOUS, leaveBattleVictorious);
+            Messenger.RemoveListener(DungeonEvent.TRY_ENTER_BATTLE, tryEnterBattle);
             Messenger.RemoveListener(BattleEvent.LEAVE_BATTLE_DEFEATED, leaveBattleDefeated);
+            Messenger.RemoveListener(InventoryEvent.OPEN_INVENTORY, openInventory);
         }
 
         private void resetGame()
@@ -47,14 +43,9 @@ namespace game
             Messenger.Broadcast(GameEvent.RESET_GAME);
         }
 
-        public void tryEnterDungeon()// dungeon lvl 0
+        public void openInventory()
         {
-            Messenger.Broadcast(DungeonEvent.ENTER_DUNGEON);
-        }
-
-        public void tryDescend()// dungeon lvl++
-        {
-            Messenger.Broadcast(DungeonEvent.DESCEND);
+            inventoryManager.openInventory(playerModel);
         }
 
         public void tryEnterBattle()
@@ -68,11 +59,6 @@ namespace game
                 BattleArgs args = new BattleArgs(playerModel, enemyModel);
                 Messenger<BattleArgs>.Broadcast(BattleEvent.ENTER_BATTLE, args);
             }
-        }
-
-        public void leaveBattleVictorious()
-        {
-            //...
         }
 
         public void leaveBattleDefeated()

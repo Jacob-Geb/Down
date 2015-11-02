@@ -1,4 +1,4 @@
-﻿using battle.attacks;
+﻿using equipment;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,8 +14,6 @@ namespace battle.queue
         protected List<AbilityProgress> abilities = new List<AbilityProgress>();
         protected AbilityQueueView queueView;
 
-        public Action<AttackArgs> triggerDelegate;
-
         protected virtual void OnEnable()
         {
             Messenger.AddListener(BattleEvent.END_BATTLE, onBattleEnd);
@@ -26,9 +24,8 @@ namespace battle.queue
             Messenger.AddListener(BattleEvent.END_BATTLE, onBattleEnd);
         }
 
-        public virtual void init(Action<AttackArgs> callback, AbilityQueueView queueView, int maxAbilities)
+        public virtual void init(AbilityQueueView queueView, int maxAbilities)
         {
-            this.triggerDelegate = callback;
             this.queueView = queueView;
             this.maxAbilities = maxAbilities;
             queueActive = true;
@@ -49,16 +46,16 @@ namespace battle.queue
                 abilities[0].update(Time.deltaTime);
                 if (abilities[0].ready)
                 {
-                    triggerActive();
+                    triggerActiveAbility();
                 }
             }
         }
 
-        protected void tryAddAbility(AttackArgs args)
+        protected void tryAddAbility(AbilityCommand command)
         {
             if (queueActive && abilities.Count < maxAbilities)
             {
-                abilities.Add(new AbilityProgress(args));
+                abilities.Add(new AbilityProgress(command));
                 queueView.updateView(abilities);
             }
         }
@@ -75,19 +72,11 @@ namespace battle.queue
             }
         }
 
-        protected void triggerActive()
+        protected void triggerActiveAbility()
         {
-            if (triggerDelegate != null)
-            {
-                triggerDelegate(abilities[0].args);
-            }
-
-
+            abilities[0].command.execute();
             remove(0);
         }
-
-        
-
 
     }
 }

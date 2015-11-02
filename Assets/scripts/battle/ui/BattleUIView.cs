@@ -1,5 +1,6 @@
-﻿using battle.attacks;
-using battle.queue;
+﻿using battle.queue;
+using characters;
+using characters.enemy;
 using characters.player;
 using equipment;
 using UnityEngine;
@@ -11,27 +12,29 @@ namespace battle.ui
         [SerializeField]
         public GameObject AbilityBtnObj;
 
-        public void init(PlayerModel playerModel)
+        public void init(PlayerModel player, BaseCharacter enemy)
         {
             Vector3 pos = new Vector3(-282, -342, 0);
             AbilityCommand tmpCommand;
 
-            for (int i = 0; i < playerModel.abilities.Count; i++) {
-
-                //tmpCommand = playerModel.abilities[i].getCommand();
-                tmpCommand = playerModel.abilities[i];
-                addAbilityBtn(tmpCommand, pos);
-                pos.x += 200;
+            for (int i = 0; i < player.equipment.Count; i++) 
+            {
+                if (player.equipment[i].equiped)
+                {
+                    tmpCommand = player.equipment[i].getCommand(player, enemy);
+                    addAbilityBtn(tmpCommand, pos, player.equipment[i].iconPath);
+                    pos.x += 200;
+                }
             }
         }
 
-        private void addAbilityBtn(AbilityCommand command, Vector3 pos)
+        private void addAbilityBtn(AbilityCommand command, Vector3 pos, string iconPath)
         {
             GameObject abilityBtn = GameObject.Instantiate(AbilityBtnObj);
             abilityBtn.transform.SetParent(transform);
             abilityBtn.transform.localScale = Vector3.one;
             abilityBtn.transform.localPosition = pos;
-            abilityBtn.GetComponent<AbilityButton>().initButton(command);
+            abilityBtn.GetComponent<AbilityButton>().initButton(command, iconPath);
         }
     }
 }

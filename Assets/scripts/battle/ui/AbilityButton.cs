@@ -1,24 +1,24 @@
-﻿using battle.attacks;
-using config;
+﻿
 using equipment;
-using System;
 using UnityEngine;
 using UnityEngine.UI;
 namespace battle.ui
 {
     class AbilityButton : MonoBehaviour
     {
-        private AttackArgs attackArgs;
+        [SerializeField]
+        private Image icon;
 
-        //public void initButton(AttackArgs attackArgs)
-        public void initButton(AbilityCommand command)
+        private AbilityCommand command;
+        public void initButton(AbilityCommand command, string iconPath)
         {
-            this.attackArgs = attackArgs;
+            icon.sprite = Resources.Load<Sprite>(iconPath); 
+            this.command = command;
         }
 
         public void OnBtnPress()
         {
-            Messenger<AttackArgs>.Broadcast(BattleUIEvent.ABILITY_BTN_PRESS, attackArgs, MessengerMode.DONT_REQUIRE_LISTENER);
+            Messenger<AbilityCommand>.Broadcast(BattleUIEvent.ABILITY_BTN_PRESS, command, MessengerMode.DONT_REQUIRE_LISTENER);
         }
     }
 }

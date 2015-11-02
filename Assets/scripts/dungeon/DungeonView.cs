@@ -20,7 +20,7 @@ namespace dungeon.room
             currentRoom.enterAndEnable(direction);
         }
 
-        public void updateCurrentRoom(RoomModel model)
+        public void updateCurrentRoom(IRoom model)
         {
             if (currentRoom)
                 Destroy(currentRoom.gameObject);
@@ -28,7 +28,7 @@ namespace dungeon.room
             currentRoom.roomeEnabled = true;
         }
 
-        private RoomView makeCurrent(RoomModel model)
+        private RoomView makeCurrent(IRoom model)
         {
             return RoomFactory.makeRoom(model, transform);
         }

@@ -1,43 +1,80 @@
-﻿using battle.attacks;
-using equipment;
+﻿using equipment;
 using equipment.weapons;
 using System.Collections.Generic;
+using UnityEngine;
 namespace characters.player
 {
     public class PlayerModel : BaseCharacter
     {
+        public List<Equipment> equipment { get; protected set; }
+        private Equipment leftHandWeapon = null;
 
-        IEquipment leftHandWeapon;
-        // right hand
-        // body
-        // consumables & useables
-        // pasives
-
-        public PlayerModel()//args
+        public PlayerModel()
         {
-            resetPlayer();
+            equipment = new List<Equipment>();
         }
 
         public void resetPlayer()
         {
             hp = 5.0f;
-            leftHandWeapon = new Dagger();
+            equipment.Clear();
+
+            Equipment dagger = new Dagger();
+            pickUpItem(dagger);
+            equip(dagger);
         }
 
-        public List<AbilityCommand> abilities
+        public void pickUpItem(Equipment item)
         {
-            get {
-                List<AbilityCommand> commands = new List<AbilityCommand>();
+            equipment.Add(item);
+        }
 
-                // from left
-                commands.Add(leftHandWeapon.getCommand());
+        public void dropItem(Equipment item)
+        {
+            equipment.Remove(item);
+        }
 
-                // tmps
-                //abilities.Add(new AttackArgs(2, 5));
+        public void sellItem(Equipment item)
+        {
+            // gold += item.value;
+            equipment.Remove(item);
+        }
 
-                return commands;
+        public void equip(Equipment item)
+        {
+            if (item.equiped)
+                Debug.LogError("itm already equiped!");
+
+            switch (item.slot)
+            {
+                case Slot.LEFT_HAND:
+
+                    if (leftHandWeapon != null)
+                        dequip(leftHandWeapon);
+
+                    leftHandWeapon = item;
+                    leftHandWeapon.equiped = true;
+                    break;
+
+
+                default:
+                    Debug.LogWarning("no valid slot");
+                    break;
             }
         }
-        
+
+        public void dequip(Equipment item)
+        {
+            if (!item.equiped)
+                Debug.LogError("cant dequip weapon that is not equiped");
+
+            switch (item.slot)
+            {
+                case Slot.LEFT_HAND:
+                    leftHandWeapon.equiped = false;
+                    leftHandWeapon = null;
+                    break;
+            }
+        }
     }
 }

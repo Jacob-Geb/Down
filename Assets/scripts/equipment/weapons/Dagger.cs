@@ -1,24 +1,45 @@
-﻿using battle.attacks;
+﻿using characters;
 namespace equipment.weapons
 {
     class Dagger : Equipment
     {
-        private AttackArgs _attackArgs;
+        private float damage;
+        private float castTime;
 
-        public Dagger()
+        public Dagger()// modifier? (chipped, balanced, etc)
         {
-            _attackArgs = new AttackArgs(2, 1);
+            this.damage = 1;
+            this.castTime = 1;
+            this.slot = Slot.LEFT_HAND;
         }
 
-        public AttackArgs attackArgs
+        public override AbilityCommand getCommand(BaseCharacter actor, BaseCharacter target)
         {
-            get { return _attackArgs; }
+            return new AttackCommand(actor, target, castTime, damage);
         }
 
-        override public AbilityCommand getCommand
+        public override string description
         {
-            return new attackArgs
-
+            get
+            {
+                string description = "Dagger \n "+this.damage +"dmg afer "+this.castTime+"s";
+                if (equiped)
+                    description += "\n *equipped";
+                return description;
+            }
         }
+
+        public override string iconPath 
+        {
+            get {
+                return "ui/icons/dagger";
+            }
+        }
+
+        public override string ToString()
+        {
+            return "Dagger { dmg: " + this.damage + ", castTime: " + this.castTime +"}";
+        }
+        
     }
 }

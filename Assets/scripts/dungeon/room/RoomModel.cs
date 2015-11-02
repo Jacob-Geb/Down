@@ -1,24 +1,43 @@
 ﻿using characters.enemy;
 using config;
+using Dungeon;
+using loot;
+using System;
 using UnityEngine;
 namespace dungeon.room
 {
-    public class RoomModel
+    public class RoomModel : IRoom
     {
-        public Vector2 pos;
+        public Vector2 pos {get;set;}
         public bool isStart;
         public bool isEnd;
 
-        public int roomType;
-        public EnemyType enemyType {get; set;}
-        public bool[] walls;
+        public int roomType { get; set; }
+        public EnemyType enemyType { get; set; }
+        public Loot loot { get; set; }
+        public bool[] walls {get;set;}
 
-        public RoomModel(Vector2 pos, bool isStart = false, bool isEnd = false, EnemyType enemyType = EnemyType.NONE)
+        public RoomModel(Vector2 pos, bool isStart = false, bool isEnd = false, EnemyType enemyType = EnemyType.NONE, Nullable<Loot> loot = null)
         {
             this.pos = pos;
             this.isStart = isStart;
             this.isEnd = isEnd;
             this.enemyType = enemyType;
+            if (loot != null)
+                this.loot = (Loot)loot;
+            else
+                this.loot = new Loot(LootType.NONE);
+
+        }
+
+        public void setup()
+        {
+            Messenger.AddListener(DungeonEvent.TRY_PICKUP_LOOT, tryPickupLoot);
+        }
+
+        public void teardown()
+        {
+            Messenger.RemoveListener(DungeonEvent.TRY_PICKUP_LOOT, tryPickupLoot);
         }
 
         public void killEnemy()
@@ -40,5 +59,9 @@ namespace dungeon.room
             return true;
         }
 
+        private void tryPickupLoot()
+        {
+            Debug.Log("tryPickupLoot");
+        }
     }
 }

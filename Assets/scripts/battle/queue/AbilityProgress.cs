@@ -1,22 +1,22 @@
-﻿using battle.attacks;
+﻿using equipment;
 using UnityEngine;
 
 namespace battle.queue
 {
     public class AbilityProgress
     {
-        public AttackArgs args;
+        public AbilityCommand command { get; protected set; }
         public float progress {
             get{
-                return progressInS / args.castTime;
+                return progressInS / command.castTime;
             }
         }
 
         private float progressInS = 0;
 
-        public AbilityProgress(AttackArgs args)
+        public AbilityProgress(AbilityCommand command)
         {
-            this.args = args;
+            this.command = command;
             progressInS = 0f;
         }
 
@@ -28,7 +28,7 @@ namespace battle.queue
         public bool ready
         {
             get{
-                return progressInS >= args.castTime;
+                return progressInS >= command.castTime;
             }
         }
     }

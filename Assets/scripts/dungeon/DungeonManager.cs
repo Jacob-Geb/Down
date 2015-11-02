@@ -10,6 +10,7 @@ using dungeon.ui;
 using util;
 using Dungeon.room;
 using System;
+using ui.inventory;
 
 public class 
     DungeonManager : MonoBehaviour {
@@ -30,7 +31,6 @@ public class
 
         uiCont = new GameObject("UI");
         uiCont.centerScale(transform);
-
 	}
 
     void OnEnable()
@@ -42,6 +42,8 @@ public class
         Messenger.AddListener(DungeonEvent.ENTER_DUNGEON, enterDungeon);
         Messenger.AddListener(DungeonEvent.DESCEND, descend);
         Messenger.AddListener(RoomEvent.ENTER_ROOM, enterRoom);
+        Messenger.AddListener(InventoryEvent.OPEN_INVENTORY, disableDungeon);
+        Messenger.AddListener(InventoryEvent.CLOSE_INVENTORY, enableDungeon);
     }
 
     void OnDisable()
@@ -53,6 +55,8 @@ public class
         Messenger.RemoveListener(DungeonEvent.ENTER_DUNGEON, enterDungeon);
         Messenger.RemoveListener(DungeonEvent.DESCEND, descend);
         Messenger.RemoveListener(RoomEvent.ENTER_ROOM, enterRoom);
+        Messenger.RemoveListener(InventoryEvent.OPEN_INVENTORY, disableDungeon);
+        Messenger.RemoveListener(InventoryEvent.CLOSE_INVENTORY, enableDungeon);
     }
 
     private void enterDungeon()
@@ -92,7 +96,7 @@ public class
         if (dungeonModel.canGo(dir))
         {
             Vector2 newRoomPos = dungeonModel.currentRoom.pos + Positions.fromDir(dir);
-            RoomModel newRoom = dungeonModel.getRoomFromPos(newRoomPos);
+            dungeonModel.getRoomFromPos(newRoomPos);
             changeRoom(dir);
         }
     }
@@ -121,8 +125,7 @@ public class
 
     private void enterBattle(BattleArgs args)
     {
-        if (dungeonView != null)
-            dungeonView.gameObject.SetActive(false);
+        disableDungeon();
     }
 
     private void leaveBattleVictorious()
@@ -132,12 +135,24 @@ public class
             dungeonModel.leaveBattleVictorious();
             dungeonView.updateCurrentRoom(dungeonModel.currentRoom);
             dungeonUI.updateUI(dungeonModel.currentRoom);
-            dungeonView.gameObject.SetActive(true);
+            enableDungeon();
         }
     }
 
     private void leaveBattleDefeated()
     {
         removeDungeon();
+    }
+
+    private void enableDungeon()
+    {
+        if (dungeonView != null)
+            dungeonView.gameObject.SetActive(true);
+    }
+
+    private void disableDungeon()
+    {
+        if (dungeonView != null)
+            dungeonView.gameObject.SetActive(false);
     }
 }

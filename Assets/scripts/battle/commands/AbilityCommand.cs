@@ -1,12 +1,8 @@
-﻿using battle.attacks;
-namespace equipment
+﻿namespace equipment
 {
-    abstract class  AbilityCommand
+    public abstract class  AbilityCommand
     {
-        public AbilityCommand()
-        {
-        }
-
+        public float castTime { get; protected set; } 
         abstract public void execute();
     }
 }

@@ -56,7 +56,7 @@ namespace dungeon.room
                 //BattleEvent
                 // TODO not sure if this should be here..
                 // not sure if movement should be hadled here
-                Messenger.Broadcast(DungeonEvent.TRY_ENTER_DUNGEON);
+                Messenger.Broadcast(DungeonEvent.ENTER_DUNGEON);
             }
         }
 

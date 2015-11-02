@@ -31,7 +31,7 @@ namespace battle
             //initBattle all Three
             playerView.init(player);
             enemyView.init(enemy);
-            battleUIView.init(player);
+            battleUIView.init(player, enemy);
 
             updateView(player, enemy);
         }
