@@ -1,6 +1,8 @@
 ﻿using config;
+using dungeon.room;
 using UnityEngine;
-namespace dungeon.room
+
+namespace dungeon
 {
     class DungeonView : MonoBehaviour 
     {

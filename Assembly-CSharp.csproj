@@ -110,7 +110,6 @@
      <Compile Include="Assets\scripts\Plugins\GoKit\properties\splines\GoSplineCubicBezierSolver.cs" />
      <Compile Include="Assets\scripts\Plugins\GoKit\properties\splines\GoSplineQuadraticBezierSolver.cs" />
      <Compile Include="Assets\scripts\Plugins\GoKit\properties\splines\GoSplineStraightLineSolver.cs" />
-     <Compile Include="Assets\scripts\battle\BattleArgs.cs" />
      <Compile Include="Assets\scripts\battle\BattleCalculator.cs" />
      <Compile Include="Assets\scripts\battle\BattleEvent.cs" />
      <Compile Include="Assets\scripts\battle\BattleManager.cs" />
@@ -118,6 +117,7 @@
      <Compile Include="Assets\scripts\battle\BattleViewFactory.cs" />
      <Compile Include="Assets\scripts\battle\commands\AbilityCommand.cs" />
      <Compile Include="Assets\scripts\battle\commands\AttackCommand.cs" />
+     <Compile Include="Assets\scripts\battle\commands\ShieldCommand.cs" />
      <Compile Include="Assets\scripts\battle\common\OldRoomView.cs" />
      <Compile Include="Assets\scripts\battle\queue\AbilityProgress.cs" />
      <Compile Include="Assets\scripts\battle\queue\AbilityQueue.cs" />
@@ -150,6 +150,7 @@
      <Compile Include="Assets\scripts\dungeon\DungeonManager.cs" />
      <Compile Include="Assets\scripts\dungeon\DungeonModel.cs" />
      <Compile Include="Assets\scripts\dungeon\DungeonView.cs" />
+     <Compile Include="Assets\scripts\dungeon\objects\LootContainer.cs" />
      <Compile Include="Assets\scripts\dungeon\room\IRoom.cs" />
      <Compile Include="Assets\scripts\dungeon\room\NullRoom.cs" />
      <Compile Include="Assets\scripts\dungeon\room\RoomEvent.cs" />
@@ -161,6 +162,8 @@
      <Compile Include="Assets\scripts\equipment\Equipment.cs" />
      <Compile Include="Assets\scripts\equipment\EquipmentSlot.cs" />
      <Compile Include="Assets\scripts\equipment\weapons\Dagger.cs" />
+     <Compile Include="Assets\scripts\equipment\weapons\Shield.cs" />
+     <Compile Include="Assets\scripts\equipment\weapons\Sword.cs" />
      <Compile Include="Assets\scripts\game\GameEvent.cs" />
      <Compile Include="Assets\scripts\game\GameManager.cs" />
      <Compile Include="Assets\scripts\input\MiniGestureRecognizer.cs" />
@@ -168,8 +171,6 @@
      <Compile Include="Assets\scripts\loot\Loot.cs" />
      <Compile Include="Assets\scripts\loot\LootGenerator.cs" />
      <Compile Include="Assets\scripts\loot\LootType.cs" />
-     <Compile Include="Assets\scripts\scriptableObjects\First.cs" />
-     <Compile Include="Assets\scripts\scriptableObjects\Second.cs" />
      <Compile Include="Assets\scripts\town\TownEvent.cs" />
      <Compile Include="Assets\scripts\town\TownManager.cs" />
      <Compile Include="Assets\scripts\town\TownView.cs" />
@@ -181,6 +182,7 @@
      <Compile Include="Assets\scripts\ui\inventory\InventoryView.cs" />
      <Compile Include="Assets\scripts\ui\inventory\ItemInfo.cs" />
      <Compile Include="Assets\scripts\util\Messenger.cs" />
+     <Compile Include="Assets\scripts\util\ScriptableObjectUtility.cs" />
      <Compile Include="Assets\scripts\util\util.cs" />
      <None Include="Assets\scripts\Plugins\GoKit\easing\easeEquationsLicense.txt" />
  <Reference Include="UnityEngine.UI">

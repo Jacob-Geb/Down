@@ -14,6 +14,7 @@ namespace equipment
             this.target = target;
             this.castTime = castTime;
             this.damage = damage;
+            this.iconPath = "ui/icons/swordSymbol";
         }
 
         override public void execute()

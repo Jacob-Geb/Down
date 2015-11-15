@@ -25,6 +25,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 447852}
+  - 114: {fileID: 11444834}
   m_Layer: 0
   m_Name: genericLoot
   m_TagString: Untagged
@@ -45,6 +46,19 @@ Transform:
   - {fileID: 22470152}
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!114 &11444834
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 196314}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9813b0ed2a9b7f04ab9413be68b7c29a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  containerIng: {fileID: 11465350}
+  openSourceImg: {fileID: 21300000, guid: e5286548692472942a73de62de660071, type: 3}
 --- !u!114 &11465350
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -86,8 +100,8 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: 40, y: 18}
-  m_SizeDelta: {x: 259, y: 229}
+  m_AnchoredPosition: {x: 40, y: 63}
+  m_SizeDelta: {x: 259, y: 320}
   m_Pivot: {x: .5, y: .5}
 --- !u!1001 &100100000
 Prefab:

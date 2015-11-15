@@ -3,7 +3,9 @@
     public enum LootType
     {
         NONE = 0,
-        DAGGER
+        DAGGER,
+        SWORD,
+        SHIELD
 
     }
 };

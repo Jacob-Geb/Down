@@ -27,17 +27,16 @@ namespace dungeon.room
                 this.loot = (Loot)loot;
             else
                 this.loot = new Loot(LootType.NONE);
-
         }
 
         public void setup()
         {
-            Messenger.AddListener(DungeonEvent.TRY_PICKUP_LOOT, tryPickupLoot);
+            Messenger.AddListener(DungeonEvent.PICKUP_LOOT, pickupLoot);
         }
 
         public void teardown()
         {
-            Messenger.RemoveListener(DungeonEvent.TRY_PICKUP_LOOT, tryPickupLoot);
+            Messenger.RemoveListener(DungeonEvent.PICKUP_LOOT, pickupLoot);
         }
 
         public void killEnemy()
@@ -59,9 +58,9 @@ namespace dungeon.room
             return true;
         }
 
-        private void tryPickupLoot()
+        private void pickupLoot()
         {
-            Debug.Log("tryPickupLoot");
+            this.loot = new Loot(LootType.NONE);
         }
     }
 }

@@ -7,6 +7,7 @@ public class MiniGestureRecognizer : MonoBehaviour
 {
     public event Action<Dir> Swipe;
     private bool swiping = false;
+    private bool reversDir = true;
     private bool eventSent = false;
     private Vector2 lastPosition;
 
@@ -41,17 +42,17 @@ public class MiniGestureRecognizer : MonoBehaviour
                         if (Mathf.Abs(direction.x) > Mathf.Abs(direction.y))
                         {
                             if (direction.x > 0)
-                                Swipe(Dir.RIGHT);
+                                Swipe((reversDir) ? Dir.LEFT : Dir.RIGHT);
                             else
-                                Swipe(Dir.LEFT);
+                                Swipe((reversDir) ? Dir.RIGHT : Dir.LEFT);
 
                         }
                         else
                         {
                             if (direction.y > 0)
-                                Swipe(Dir.UP);
+                                Swipe((reversDir) ? Dir.DOWN : Dir.UP);
                             else
-                                Swipe(Dir.DOWN);
+                                Swipe((reversDir) ? Dir.UP : Dir.DOWN);
                         }
 
                         eventSent = true;

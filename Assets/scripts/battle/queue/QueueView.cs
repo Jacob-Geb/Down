@@ -6,13 +6,15 @@ namespace battle.queue
 {
     class QueueView : InteractableBase
     {
-        public AbilityProgress abilityProgress;
 
         [SerializeField]
         private Image progressImg;
         [SerializeField]
         private GameObject view;
+        [SerializeField]
+        private Image icon;
 
+        public AbilityProgress abilityProgress { get; protected set; }
         private int id;
 
         public void init(int id)
@@ -39,7 +41,8 @@ namespace battle.queue
 
         public void init(AbilityProgress progress)
         {
-            this.abilityProgress = progress;
+            abilityProgress = progress;
+            icon.sprite = Resources.Load<Sprite>(abilityProgress.command.iconPath); 
             showView();
         }
 
@@ -51,6 +54,7 @@ namespace battle.queue
         private void showView( )
         {
             view.gameObject.SetActive(true);
+  
         }
         private void hideView()
         {

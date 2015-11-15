@@ -14,8 +14,7 @@ namespace dungeon
             obj.transform.localScale = Vector3.one;
             obj.transform.localPosition = Vector3.zero;
 
-
-            return obj.GetComponent<DungeonView>();
+           return obj.GetComponent<DungeonView>();
         }
     }
 }

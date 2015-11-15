@@ -32,7 +32,6 @@ namespace battle
         {
             // TODO SHOULD WE BE LISTENING TO THESE IF WE'RE NOT IN BATTLEMODE??
             // DO WE DELEAT THE MANAGER?
-            Messenger<BattleArgs>.AddListener(BattleEvent.ENTER_BATTLE, enterBattle);
             Messenger.AddListener(BattleEvent.ABILITY_EXECUTED, abilityExecuted);
             Messenger.AddListener(BattleEvent.LEAVE_BATTLE_VICTORIOUS, leaveBattleVictorious); // BattleMaager should decide this.. not send it
             Messenger.AddListener(BattleEvent.LEAVE_BATTLE_DEFEATED, leaveBattleDefeated);
@@ -40,10 +39,46 @@ namespace battle
 
         void OnDisable()
         {
-            Messenger<BattleArgs>.RemoveListener(BattleEvent.ENTER_BATTLE, enterBattle);
             Messenger.RemoveListener(BattleEvent.ABILITY_EXECUTED, abilityExecuted);
             Messenger.RemoveListener(BattleEvent.LEAVE_BATTLE_VICTORIOUS, leaveBattleVictorious);
             Messenger.RemoveListener(BattleEvent.LEAVE_BATTLE_DEFEATED, leaveBattleDefeated);
+        }
+
+        public void enterBattle(PlayerModel player, EnemyType enemyType)
+        {
+            playerModel = player;
+            enemyModel = EnemyFactory.fromType(enemyType);
+
+            initBattleViews();
+            enemyAI = new EnemyAI(enemyModel, playerModel);
+            initQueues();
+        }
+
+        private void initBattleViews()
+        {
+            GameObject battleViewObj = GameObject.Instantiate(Resources.Load("battle/BattleView", typeof(GameObject))) as GameObject;
+            battleViewObj.transform.SetParent(transform);
+            battleViewObj.transform.localScale = Vector3.one;
+            battleViewObj.transform.localPosition = Positions.CENTER;
+
+            battleView = battleViewObj.GetComponent<BattleView>();
+            battleView.initBattle(playerModel, enemyModel);
+        }
+
+        private void initQueues()
+        {
+            GameObject playerView = GetComponentInChildren<BattleView>().
+                    gameObject.GetComponentInChildren<PlayerView>().gameObject;
+            AbilityQueueView playerQueueView = playerView.GetComponentInChildren<AbilityQueueView>();
+
+            playerQueue = ScriptableObject.CreateInstance<PlayerQueue>();
+            playerQueue.init( playerQueueView, 3);
+
+            GameObject enemyView = GetComponentInChildren<BattleView>().
+                    gameObject.GetComponentInChildren<EnemyView>().gameObject;
+            AbilityQueueView enemyQueueView = enemyView.GetComponentInChildren<AbilityQueueView>();
+            enemyQueue = ScriptableObject.CreateInstance<EnemyQueue>();
+            enemyQueue.init( enemyQueueView, 1);
         }
 
         private void Update()
@@ -63,43 +98,6 @@ namespace battle
 
             if (enemyQueue != null)
                 enemyQueue.updateQueue();
-        }
-
-        public void enterBattle(BattleArgs args)
-        {
-            initBattleViews(args);
-            initQueues();
-        }
-
-        private void initBattleViews(BattleArgs args)
-        {
-            GameObject battleViewObj = GameObject.Instantiate(Resources.Load("battle/BattleView", typeof(GameObject))) as GameObject;
-            battleViewObj.transform.SetParent(transform);
-            battleViewObj.transform.localScale = Vector3.one;
-            battleViewObj.transform.localPosition = Positions.CENTER;
-
-            battleView = battleViewObj.GetComponent<BattleView>();
-            battleView.initBattle(args.playerModel, args.enemyModel);
-
-            playerModel = args.playerModel;
-            enemyModel = args.enemyModel;
-            enemyAI = new EnemyAI(args.enemyModel, args.playerModel);
-        }
-
-        private void initQueues()
-        {
-            GameObject playerView = GetComponentInChildren<BattleView>().
-                    gameObject.GetComponentInChildren<PlayerView>().gameObject;
-            AbilityQueueView playerQueueView = playerView.GetComponentInChildren<AbilityQueueView>();
-
-            playerQueue = ScriptableObject.CreateInstance<PlayerQueue>();
-            playerQueue.init( playerQueueView, 3);
-
-            GameObject enemyView = GetComponentInChildren<BattleView>().
-                    gameObject.GetComponentInChildren<EnemyView>().gameObject;
-            AbilityQueueView enemyQueueView = enemyView.GetComponentInChildren<AbilityQueueView>();
-            enemyQueue = ScriptableObject.CreateInstance<EnemyQueue>();
-            enemyQueue.init( enemyQueueView, 1);
         }
 
         private void abilityExecuted()

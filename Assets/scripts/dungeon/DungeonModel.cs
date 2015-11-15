@@ -86,7 +86,7 @@ namespace dungeon
             rooms[5].enemyType = EnemyType.CELLAR_RAT;
             rooms[7].enemyType = EnemyType.CELLAR_RAT;
 
-            rooms[1].loot = new Loot(LootType.DAGGER); 
+            rooms[1].loot = new Loot(LootType.SHIELD); 
 
             //rooms[1].enemyType = EnemyType.CELLAR_RAT;
 

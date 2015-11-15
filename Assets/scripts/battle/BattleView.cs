@@ -1,5 +1,6 @@
 ﻿using Assets.scripts.characters.player;
 using battle.ui;
+using characters;
 using characters.enemy;
 using characters.player;
 using config;
@@ -23,6 +24,7 @@ namespace battle
         private PlayerView playerView;
         private EnemyView enemyView;
         private BattleUIView battleUIView;
+
 
         public void initBattle(PlayerModel player, EnemyModel enemy)
         {

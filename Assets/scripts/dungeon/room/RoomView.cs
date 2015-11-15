@@ -1,6 +1,7 @@
 ﻿
 using battle;
 using config;
+using dungeon.objects;
 using Dungeon;
 using Dungeon.room;
 using System;
@@ -22,6 +23,7 @@ namespace dungeon.room
             dungeonView = GameObject.Find("DungeonView");
             if (dungeonView != null)
             {
+                Messenger.AddListener(DungeonEvent.PICKUP_LOOT, pickupLoot);
 #if UNITY_EDITOR || UNITY_STANDALONE || UNITY_WEBPLAYER
                 dungeonView.GetComponent<MiniKeypressRecognizer>().KeyPress += tryChangeDir;
 #elif UNITY_IOS || UNITY_ANDROID
@@ -32,6 +34,8 @@ namespace dungeon.room
 
         private void OnDisable()
         {
+            Messenger.RemoveListener(DungeonEvent.PICKUP_LOOT, pickupLoot);
+
             if (dungeonView != null)
             {
 #if UNITY_EDITOR || UNITY_STANDALONE || UNITY_WEBPLAYER
@@ -108,8 +112,15 @@ namespace dungeon.room
             Messenger.Broadcast(RoomEvent.ENTER_ROOM);
         }
 
+        private void pickupLoot()
+        {
+            var lootCont = GetComponentInChildren<LootContainer>();
+            if (lootCont)
+                lootCont.open();
+        }
+
         // movement
-        public void tryGoRight()
+        public void tryGoRight() // Todo Put in movments compartment.. TODO Cheeck if we should remove from room (dungeon? navigation?)!
         {
             tryChangeDir(Dir.RIGHT);
         }

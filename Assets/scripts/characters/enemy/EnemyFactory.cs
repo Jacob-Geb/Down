@@ -9,9 +9,9 @@ namespace characters.enemy
             switch (enemyType)
             {
                 case EnemyType.CELLAR_RAT:
-                    return new EnemyModel(3);
+                    return new EnemyModel(10);
                 case EnemyType.CELLAR_GOBLIN:
-                    return new EnemyModel(5);
+                    return new EnemyModel(10);
 
                 default:
                     throw new Exception("no valid enemy");

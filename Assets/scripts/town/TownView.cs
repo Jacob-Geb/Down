@@ -2,7 +2,7 @@
 using System;
 using config;
 using UnityEngine;
-using Dungeon;
+using dungeon;
 
 namespace town
 {

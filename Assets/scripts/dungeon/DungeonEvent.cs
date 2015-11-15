@@ -1,4 +1,4 @@
-﻿namespace Dungeon
+﻿namespace dungeon
 {
     class DungeonEvent
     {
@@ -8,6 +8,6 @@
 
         public static string TRY_ENTER_BATTLE = "tryEnterBattle";
         public static string TRY_PICKUP_LOOT = "tryPickupLoot";
-
-    }
+        public static string PICKUP_LOOT = "pickupLoot";
+   }
 }

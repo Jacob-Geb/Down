@@ -28,10 +28,10 @@ namespace characters.ai
             nextMove -= Time.deltaTime;
             if (nextMove <= 0)
             {
-                nextMove = Random.Range(0, 1) + 4;
+                nextMove = Random.Range(0, 1) + 2;
 
                 //AttackArgs enemyAttack = new AttackArgs(3, 1);
-                AbilityCommand enemyAttack = new AttackCommand(enemy, player, 2, 1);
+                AbilityCommand enemyAttack = new AttackCommand(enemy, player, 1.5f, 1);
                 Messenger<AbilityCommand>.Broadcast(EnemyAIEvent.TRY_START_ENEMY_ABILITY, enemyAttack);
             }
         }

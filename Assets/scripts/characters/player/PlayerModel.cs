@@ -1,5 +1,7 @@
-﻿using equipment;
+﻿using dungeon;
+using equipment;
 using equipment.weapons;
+using loot;
 using System.Collections.Generic;
 using UnityEngine;
 namespace characters.player
@@ -8,10 +10,12 @@ namespace characters.player
     {
         public List<Equipment> equipment { get; protected set; }
         private Equipment leftHandWeapon = null;
+        private Equipment rightHandEquipment = null;
 
         public PlayerModel()
         {
             equipment = new List<Equipment>();
+            effects = new List<string>();
         }
 
         public void resetPlayer()
@@ -24,7 +28,27 @@ namespace characters.player
             equip(dagger);
         }
 
-        public void pickUpItem(Equipment item)
+        public void tryPickupLoot(Loot loot)
+        {
+            if (loot.lootType != LootType.NONE)
+            {
+                Messenger.Broadcast(DungeonEvent.PICKUP_LOOT);
+                switch (loot.lootType)
+                {
+                    case LootType.DAGGER:
+                        pickUpItem(new Dagger());//TODO etter way to make/pickup loot 
+                        break;
+                    case LootType.SWORD:
+                        pickUpItem(new Sword());//TODO etter way to make/pickup loot 
+                        break;
+                    case LootType.SHIELD:
+                        pickUpItem(new Shield());//TODO etter way to make/pickup loot 
+                        break;
+                } 
+            }
+        }
+
+        private void pickUpItem(Equipment item)
         {
             equipment.Add(item);
         }
@@ -56,6 +80,14 @@ namespace characters.player
                     leftHandWeapon.equiped = true;
                     break;
 
+                case Slot.RIGHT_HAND:
+
+                    if (rightHandEquipment != null)
+                        dequip(rightHandEquipment);
+
+                    rightHandEquipment = item;
+                    rightHandEquipment.equiped = true;
+                    break;
 
                 default:
                     Debug.LogWarning("no valid slot");
@@ -74,7 +106,17 @@ namespace characters.player
                     leftHandWeapon.equiped = false;
                     leftHandWeapon = null;
                     break;
+
+                case Slot.RIGHT_HAND:
+                    rightHandEquipment.equiped = false;
+                    rightHandEquipment = null;
+                    break;
             }
+        }
+
+        public override bool isPlayer
+        {
+            get { return true; }
         }
     }
 }

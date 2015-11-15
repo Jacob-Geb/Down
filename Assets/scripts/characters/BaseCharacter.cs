@@ -1,7 +1,10 @@
-﻿namespace characters
+﻿using System.Collections.Generic;
+namespace characters
 {
     public class BaseCharacter : ICharacter
     {
+        public List<string> effects { get; set; }
+
         private float _hp;
         public float hp
         {
@@ -19,6 +22,11 @@
         public bool isDead()
         {
             return _hp <= 0;
+        }
+
+        public virtual bool isPlayer
+        {
+            get {return false;}
         }
 
         public override string ToString()
