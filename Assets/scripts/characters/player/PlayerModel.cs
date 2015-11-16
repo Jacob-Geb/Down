@@ -8,20 +8,24 @@ namespace characters.player
 {
     public class PlayerModel : BaseCharacter
     {
-        public List<Equipment> equipment { get; protected set; }
-        private Equipment leftHandWeapon = null;
-        private Equipment rightHandEquipment = null;
+        public List<Equipment> inventory { get; protected set; }
+        public List<Equipment> equipped { get; protected set; }
 
         public PlayerModel()
         {
-            equipment = new List<Equipment>();
+            inventory = new List<Equipment>();
+            equipped = new List<Equipment>();
+            equipped.Add(null);//SLot.NONE
+            equipped.Add(null);//SLot.LEFT_HAND
+            equipped.Add(null);//SLot.RIGHT_HAND
+
             effects = new List<string>();
         }
 
         public void resetPlayer()
         {
             hp = 5.0f;
-            equipment.Clear();
+            inventory.Clear();
 
             Equipment dagger = new Dagger();
             pickUpItem(dagger);
@@ -50,68 +54,42 @@ namespace characters.player
 
         private void pickUpItem(Equipment item)
         {
-            equipment.Add(item);
+            inventory.Add(item);
         }
 
         public void dropItem(Equipment item)
         {
-            equipment.Remove(item);
-        }
-
-        public void sellItem(Equipment item)
-        {
-            // gold += item.value;
-            equipment.Remove(item);
+            inventory.Remove(item);
         }
 
         public void equip(Equipment item)
         {
-            if (item.equiped)
-                Debug.LogError("itm already equiped!");
-
-            switch (item.slot)
+            if (item.equipped)
             {
-                case Slot.LEFT_HAND:
-
-                    if (leftHandWeapon != null)
-                        dequip(leftHandWeapon);
-
-                    leftHandWeapon = item;
-                    leftHandWeapon.equiped = true;
-                    break;
-
-                case Slot.RIGHT_HAND:
-
-                    if (rightHandEquipment != null)
-                        dequip(rightHandEquipment);
-
-                    rightHandEquipment = item;
-                    rightHandEquipment.equiped = true;
-                    break;
-
-                default:
-                    Debug.LogWarning("no valid slot");
-                    break;
+                Debug.LogError("itm already equiped!");
+                return;
             }
+
+            int slotID = (int)item.slot;
+            if (equipped[slotID] != null)
+                dequip(equipped[slotID]);
+            
+
+            equipped[slotID] = item;
+            equipped[slotID].equipped = true;
         }
 
         public void dequip(Equipment item)
         {
-            if (!item.equiped)
-                Debug.LogError("cant dequip weapon that is not equiped");
-
-            switch (item.slot)
+            if (!item.equipped)
             {
-                case Slot.LEFT_HAND:
-                    leftHandWeapon.equiped = false;
-                    leftHandWeapon = null;
-                    break;
-
-                case Slot.RIGHT_HAND:
-                    rightHandEquipment.equiped = false;
-                    rightHandEquipment = null;
-                    break;
+                Debug.LogError("cant dequip weapon that is not equiped");
+                return;
             }
+
+            int slotID = (int)item.slot;
+            equipped[slotID].equipped = false;
+            equipped[slotID] = null;
         }
 
         public override bool isPlayer

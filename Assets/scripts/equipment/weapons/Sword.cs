@@ -23,7 +23,7 @@ namespace equipment.weapons
             get
             {
                 string description = "Sword \n "+this.damage +"dmg after "+this.castTime+"s";
-                if (equiped)
+                if (equipped)
                     description += "\n *equipped";
                 return description;
             }

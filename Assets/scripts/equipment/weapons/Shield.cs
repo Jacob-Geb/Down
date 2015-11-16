@@ -23,7 +23,7 @@ namespace equipment.weapons
             get
             {
                 string description = "Shield \n blocks " + this.blockAmount *100 + "% of dmg, time: " + this.castTime + "s";
-                if (equiped)
+                if (equipped)
                     description += "\n *equipped";
                 return description;
             }

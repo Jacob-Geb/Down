@@ -17,12 +17,12 @@ namespace battle.ui
             Vector3 pos = new Vector3(-282, -342, 0);
             AbilityCommand tmpCommand;
 
-            for (int i = 0; i < player.equipment.Count; i++) 
+            for (int i = 0; i < player.inventory.Count; i++) 
             {
-                if (player.equipment[i].equiped)
+                if (player.inventory[i].equipped)
                 {
-                    tmpCommand = player.equipment[i].getCommand(player, enemy);
-                    addAbilityBtn(tmpCommand, pos, player.equipment[i].iconPath);
+                    tmpCommand = player.inventory[i].getCommand(player, enemy);
+                    addAbilityBtn(tmpCommand, pos, player.inventory[i].iconPath);
                     pos.x += 200;
                 }
             }

@@ -175,6 +175,7 @@
      <Compile Include="Assets\scripts\town\TownManager.cs" />
      <Compile Include="Assets\scripts\town\TownView.cs" />
      <Compile Include="Assets\scripts\ui\InteractableBase.cs" />
+     <Compile Include="Assets\scripts\ui\inventory\EquippedView.cs" />
      <Compile Include="Assets\scripts\ui\inventory\InventoryEvent.cs" />
      <Compile Include="Assets\scripts\ui\inventory\InventoryItem.cs" />
      <Compile Include="Assets\scripts\ui\inventory\InventoryItemFactory.cs" />

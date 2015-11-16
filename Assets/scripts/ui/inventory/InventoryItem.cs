@@ -18,9 +18,9 @@ namespace ui.inventory
         [SerializeField]
         private Color defaultColour;
 
-        private Equipment equipment;
-        private bool longHold;
+        public Equipment equipment { get; protected set; }
 
+        private bool longHold;
         private float pressTime; 
 
         public void init(Equipment equipment)
@@ -29,13 +29,30 @@ namespace ui.inventory
             updateView();
         }
 
+        public void clearView()
+        {
+            this.equipment = null;
+            updateView();
+        }
+
         public void updateView( )
         {
-            icon.sprite = Resources.Load<Sprite>(equipment.iconPath);  
-            if (equipment.equiped)
-                bgImg.color = equipedColour;
+            if (equipment != null)
+            {
+                icon.sprite = Resources.Load<Sprite>(equipment.iconPath);
+                icon.enabled = true;
+
+                if (equipment.equipped)
+                    bgImg.color = equipedColour;
+                else
+                    bgImg.color = defaultColour;
+            }
             else
+            {
+                icon.enabled = false;
                 bgImg.color = defaultColour;
+            }
+
         }
 
         public void onPointerDown()

@@ -24,14 +24,15 @@ namespace ui.inventory
         private ItemInfo itemInfo;
 
         private PlayerModel playerModel;
+        private EquippedView equippedView;
         private List<InventoryItem> inventoryItems;
+
 
         void OnEnable()
         {
             Messenger<Equipment>.AddListener(InventoryEvent.ITEM_TAP, onItemTap);
             Messenger<Equipment>.AddListener(InventoryEvent.ITEM_HOLD, onItemHold);
             Messenger.AddListener(InventoryEvent.ITEM_HOLD_RELEASE, onItemRelease);
-
         }
 
         void OnDisable()
@@ -41,13 +42,23 @@ namespace ui.inventory
             Messenger.RemoveListener(InventoryEvent.ITEM_HOLD_RELEASE, onItemRelease);
         }
 
+        void Start()
+        {
+        }
+
         public void init(PlayerModel playerModel)
         {
             this.playerModel = playerModel;
             inventoryItems = new List<InventoryItem>();
-            for (int i = 0; i < playerModel.equipment.Count; i++) {
-                addItem(playerModel.equipment[i]);
+            equippedView = GetComponentInChildren<EquippedView>();
+            equippedView.Init();
+
+            for (int i = 0; i < playerModel.inventory.Count; i++)
+            {
+                addItem(playerModel.inventory[i]);
             }
+
+            updateView();
             itemInfo.close();
         }
 
@@ -61,14 +72,20 @@ namespace ui.inventory
 
         public void updateView()
         {
+            equippedView.resetSlots();
+
             for (int i = 0; i < inventoryItems.Count; i++) {
                 inventoryItems[i].updateView();
+                if (inventoryItems[i].equipment.equipped)
+                {
+                    equippedView.updateView(inventoryItems[i].equipment);
+                }
             }
         }
 
         private void onItemTap(Equipment equipment)
         {
-            if (equipment.equiped)
+            if (equipment.equipped)
             {
                 playerModel.dequip(equipment);
             }
