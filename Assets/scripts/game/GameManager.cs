@@ -46,8 +46,11 @@ namespace game
 
         private void resetGame()
         {
-            playerModel.resetPlayer();
+            playerModel.reset();
+            battleManager.reset();
+            dungeonManager.reset();
             Messenger.Broadcast(GameEvent.RESET_GAME);
+            // TODO check all views !!
         }
 
         private void openInventory()

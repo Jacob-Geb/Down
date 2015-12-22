@@ -16,7 +16,9 @@ namespace dungeon
 {
     public class DungeonManager : MonoBehaviour {
 
+        public GameObject scaleObject;
         public DungeonModel dungeonModel;
+
         private DungeonView dungeonView;
         private DungeonUI dungeonUI;
         private GameObject dungeonCover;
@@ -27,17 +29,20 @@ namespace dungeon
 	    void Start () {
             dungeonModel = new DungeonModel();
 
-            dungeonCont = new GameObject("Dungeon");
-            dungeonCont.centerScale(transform);
+            dungeonCont = Instantiate(scaleObject) as GameObject;
+            dungeonCont.name = "Dungeon Cont";
+            dungeonCont.transform.SetParent(transform, false);
+            //dungeonCont.centerScale(transform);
 
-            uiCont = new GameObject("UI");
-            uiCont.centerScale(transform);
+            uiCont = Instantiate(scaleObject) as GameObject;
+            uiCont.name = "UI Cont";
+            uiCont.transform.SetParent(transform, false);
+            //uiCont.centerScale(transform);
 	    }
 
         void OnEnable()
         {
             Messenger.AddListener(BattleEvent.LEAVE_BATTLE_VICTORIOUS, leaveBattleVictorious);
-            Messenger.AddListener(BattleEvent.LEAVE_BATTLE_DEFEATED, leaveBattleDefeated);
             Messenger<Dir>.AddListener(DungeonEvent.TRY_CHANGE_ROOM, tryChangeRoom);
             Messenger.AddListener(DungeonEvent.ENTER_DUNGEON, enterDungeon);
             Messenger.AddListener(DungeonEvent.DESCEND, descend);
@@ -49,13 +54,16 @@ namespace dungeon
         void OnDisable()
         {
             Messenger.RemoveListener(BattleEvent.LEAVE_BATTLE_VICTORIOUS, leaveBattleVictorious);
-            Messenger.RemoveListener(BattleEvent.LEAVE_BATTLE_DEFEATED, leaveBattleDefeated);
             Messenger<Dir>.RemoveListener(DungeonEvent.TRY_CHANGE_ROOM, tryChangeRoom);
             Messenger.RemoveListener(DungeonEvent.ENTER_DUNGEON, enterDungeon);
             Messenger.RemoveListener(DungeonEvent.DESCEND, descend);
             Messenger.RemoveListener(RoomEvent.ENTER_ROOM, enterRoom);
             Messenger.RemoveListener(InventoryEvent.OPEN_INVENTORY, disableDungeon);
             Messenger.RemoveListener(InventoryEvent.CLOSE_INVENTORY, enableDungeon);
+        }
+
+        public void reset() {
+            teardown();
         }
 
         private void enterDungeon()
@@ -138,11 +146,6 @@ namespace dungeon
             }
         }
 
-        private void leaveBattleDefeated()
-        {
-            removeDungeon();
-        }
-
         private void enableDungeon()
         {
             if (dungeonView != null)
@@ -153,6 +156,19 @@ namespace dungeon
         {
             if (dungeonView != null)
                 dungeonView.gameObject.SetActive(false);
+        }
+
+        private void teardown() {
+
+            // Clean Up and reset Everything
+            if (dungeonView != null)
+                Destroy(dungeonView.gameObject);
+
+            if (dungeonUI != null)
+                Destroy(dungeonUI.gameObject);
+
+            if (dungeonCover != null)
+                Destroy(dungeonCover.gameObject);
         }
     }
 }

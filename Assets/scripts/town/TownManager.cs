@@ -24,10 +24,8 @@ namespace town
 
         public void addTownView()
         {
-            townView = GameObject.Instantiate(Resources.Load("floors/Town", typeof(GameObject))) as GameObject;
+            townView = GameObject.Instantiate(Resources.Load("town/Town", typeof(GameObject))) as GameObject;
             townView.transform.SetParent(transform);
-            townView.transform.localScale = Vector3.one;
-            townView.transform.localPosition = Positions.CENTER;
         }
 
         public void removeTownView()

@@ -51,11 +51,11 @@ namespace dungeon.room
             }
         }
 
-        public int roomType
+        public RoomType roomType
         {
             get
             {
-                throw new System.NotImplementedException();
+                return RoomType.NONE;
             }
             set
             {

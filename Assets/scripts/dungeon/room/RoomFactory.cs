@@ -32,32 +32,33 @@ namespace dungeon.room
 
         private static void addWalls(GameObject room, IRoom model)
         {
-            if (model.walls[0])
-                addCeiling(room);
+            addCeiling(room, model.walls[0]);
+            addFloor(room, model.walls[2]);
+
             if (model.walls[1])
                 addRightWall(room);
-            if (model.walls[2])
-                addFloor(room);
             if (model.walls[3])
                 addLeftWall(room);
         }
 
-        private static void addCeiling(GameObject room)
+        private static void addCeiling(GameObject room, bool value)
         {
-            GameObject ceiling = GameObject.Instantiate(Resources.Load("dungeon/rooms/cellar/ceiling", typeof(GameObject))) as GameObject;
+            string assetPath = "dungeon/rooms/cellar/ceiling" + (value ? "" : "_false");
+            GameObject ceiling = GameObject.Instantiate(Resources.Load(assetPath, typeof(GameObject))) as GameObject;
             ceiling.centerScale(room.transform);
+        }
+
+        private static void addFloor(GameObject room, bool value)
+        {
+            string assetPath = "dungeon/rooms/cellar/floor" + (value ? "" : "_false");
+            GameObject floor = GameObject.Instantiate(Resources.Load(assetPath, typeof(GameObject))) as GameObject;
+            floor.centerScale(room.transform);
         }
 
         private static void addRightWall(GameObject room)
         {
             GameObject wall = GameObject.Instantiate(Resources.Load("dungeon/rooms/cellar/rightWall", typeof(GameObject))) as GameObject;
             wall.centerScale(room.transform);
-        }
-
-        private static void addFloor(GameObject room)
-        {
-            GameObject floor = GameObject.Instantiate(Resources.Load("dungeon/rooms/cellar/floor", typeof(GameObject))) as GameObject;
-            floor.centerScale(room.transform);
         }
 
         private static void addLeftWall(GameObject room)

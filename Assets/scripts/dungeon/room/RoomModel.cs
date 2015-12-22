@@ -12,7 +12,7 @@ namespace dungeon.room
         public bool isStart;
         public bool isEnd;
 
-        public int roomType { get; set; }
+        public RoomType roomType { get; set; }
         public EnemyType enemyType { get; set; }
         public Loot loot { get; set; }
         public bool[] walls {get;set;}

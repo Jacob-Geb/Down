@@ -22,7 +22,7 @@ namespace characters.player
             effects = new List<string>();
         }
 
-        public void resetPlayer()
+        public void reset()
         {
             hp = 5.0f;
             inventory.Clear();

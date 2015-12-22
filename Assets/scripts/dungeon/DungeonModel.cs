@@ -108,7 +108,7 @@ namespace dungeon
 
         public EnemyType getCurrentEnemy()
         {
-            if (currentRoom != null)
+            if (currentRoom != null) // || currentRoom.roomType != RoomType.NONE
                 return currentRoom.enemyType;
             throw new Exception("no currentRoom");
         }

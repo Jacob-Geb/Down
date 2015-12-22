@@ -24,24 +24,23 @@ namespace battle
         private AbilityQueue playerQueue;
         private AbilityQueue enemyQueue;
 
-        void Start()
-        {
-        }
-
         void OnEnable()
         {
             // TODO SHOULD WE BE LISTENING TO THESE IF WE'RE NOT IN BATTLEMODE??
             // DO WE DELEAT THE MANAGER?
             Messenger.AddListener(BattleEvent.ABILITY_EXECUTED, abilityExecuted);
             Messenger.AddListener(BattleEvent.LEAVE_BATTLE_VICTORIOUS, leaveBattleVictorious); // BattleMaager should decide this.. not send it
-            Messenger.AddListener(BattleEvent.LEAVE_BATTLE_DEFEATED, leaveBattleDefeated);
         }
 
         void OnDisable()
         {
             Messenger.RemoveListener(BattleEvent.ABILITY_EXECUTED, abilityExecuted);
             Messenger.RemoveListener(BattleEvent.LEAVE_BATTLE_VICTORIOUS, leaveBattleVictorious);
-            Messenger.RemoveListener(BattleEvent.LEAVE_BATTLE_DEFEATED, leaveBattleDefeated);
+        }
+
+        public void reset()
+        {
+            teardown();
         }
 
         public void enterBattle(PlayerModel player, EnemyType enemyType)
@@ -126,18 +125,15 @@ namespace battle
 
         private void leaveBattleVictorious()
         {
-            leaveBattle();
+            // points o something..
+            teardown();
         }
 
-        private void leaveBattleDefeated()
-        {
-            leaveBattle();
-        }
-
-        private void leaveBattle()
+        private void teardown()
         {
             // Clean Up and reset Everything
-            Destroy(battleView.gameObject);
+            if (battleView)
+                Destroy(battleView.gameObject);
             enemyAI = null;
         }
     }

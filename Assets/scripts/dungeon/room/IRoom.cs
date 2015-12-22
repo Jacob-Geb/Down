@@ -9,7 +9,7 @@ namespace dungeon.room
     {
         Vector2 pos { get; set; }
 
-        int roomType { get; set; }
+        RoomType roomType { get; set; }
         EnemyType enemyType { get; set; }
         Loot loot { get; set; }
         bool[] walls { get; set; }

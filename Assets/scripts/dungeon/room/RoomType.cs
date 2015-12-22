@@ -1,6 +1,6 @@
 ﻿namespace dungeon.room
 {
-    enum RoomType
+    public enum RoomType
     {
         NONE = 0,
         CELLAR,
