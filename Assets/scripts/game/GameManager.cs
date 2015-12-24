@@ -41,7 +41,6 @@ namespace game
             Messenger.RemoveListener(BattleEvent.LEAVE_BATTLE_DEFEATED, leaveBattleDefeated);
             Messenger.RemoveListener(InventoryEvent.OPEN_INVENTORY, openInventory);
             Messenger.RemoveListener(DungeonEvent.TRY_PICKUP_LOOT, tryPickupLoot);
-
         }
 
         private void resetGame()
