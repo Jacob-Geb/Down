@@ -15,7 +15,7 @@ namespace characters.ai
             this.enemy = enemy;
             this.player = player;
 
-            nextMove = 3;
+            nextMove = 3.0f;
             // make depending on type of enemy
         }
 
@@ -28,10 +28,9 @@ namespace characters.ai
             nextMove -= Time.deltaTime;
             if (nextMove <= 0)
             {
-                nextMove = Random.Range(0, 1) + 2;
+                nextMove = 3.6f;
 
-                //AttackArgs enemyAttack = new AttackArgs(3, 1);
-                AbilityCommand enemyAttack = new AttackCommand(enemy, player, 1.5f, 5);
+                AbilityCommand enemyAttack = new AttackCommand(enemy, player, 3.5f, 3);
                 Messenger<AbilityCommand>.Broadcast(EnemyAIEvent.TRY_START_ENEMY_ABILITY, enemyAttack);
             }
         }

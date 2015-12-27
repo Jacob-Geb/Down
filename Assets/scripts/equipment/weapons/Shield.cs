@@ -8,8 +8,8 @@ namespace equipment.weapons
 
         public Shield()// modifier? (chipped, balanced, etc)
         {
-            this.blockAmount = 1;
-            this.castTime = 1;
+            this.blockAmount = 1.0f;
+            this.castTime = 1.5f;
             this.slot = Slot.RIGHT_HAND;
         }
 

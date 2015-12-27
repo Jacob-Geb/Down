@@ -28,7 +28,21 @@ namespace dungeon.ui
         [SerializeField]
         private Image arrowDown;
         [SerializeField]
-        private Image arrowLeft; 
+        private Image arrowLeft;
+
+        private void OnEnable() {
+            Messenger.AddListener(DungeonEvent.PICKUP_LOOT, onLootPickup);
+        }
+
+        private void OnDisable() {
+            Messenger.RemoveListener(DungeonEvent.PICKUP_LOOT, onLootPickup);
+        }
+
+        private void onLootPickup() 
+        {
+            lootBtn.gameObject.SetActive(false);
+            swipeText.gameObject.SetActive(true);
+        }
 
         public void updateUI(IRoom room)
         {
@@ -42,7 +56,7 @@ namespace dungeon.ui
                 var roomHasLoot = (room.loot.lootType != LootType.NONE);
                 lootBtn.gameObject.SetActive(roomHasLoot);
                 swipeText.gameObject.SetActive(!roomHasLoot);
-            }
+           } 
             else
             {
                 disableArrows();

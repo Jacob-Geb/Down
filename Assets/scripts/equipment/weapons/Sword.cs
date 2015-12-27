@@ -9,7 +9,7 @@ namespace equipment.weapons
         public Sword()// modifier? (chipped, balanced, etc)
         {
             this.damage = 2;
-            this.castTime = 1.2f;
+            this.castTime = 1.75f;
             this.slot = Slot.LEFT_HAND;
         }
 

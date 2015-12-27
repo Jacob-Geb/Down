@@ -9,7 +9,7 @@ namespace characters.enemy
             switch (enemyType)
             {
                 case EnemyType.CELLAR_RAT:
-                    return new EnemyModel(10);
+                    return new EnemyModel(5);
                 case EnemyType.CELLAR_GOBLIN:
                     return new EnemyModel(10);
 

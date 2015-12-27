@@ -68,6 +68,7 @@ namespace battle.queue
                 {
                     abilities.RemoveAt(id);
                     queueView.updateView(abilities);
+                    return;
                 }
             }
         }

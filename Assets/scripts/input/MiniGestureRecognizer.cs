@@ -11,6 +11,8 @@ public class MiniGestureRecognizer : MonoBehaviour
     private bool eventSent = false;
     private Vector2 lastPosition;
 
+    private const float MIN_SWIPE_DIST = 3;
+
     private void Start()
     {
 #if (UNITY_EDITOR || UNITY_STANDALONE || UNITY_WEBPLAYER)
@@ -41,17 +43,17 @@ public class MiniGestureRecognizer : MonoBehaviour
 
                         if (Mathf.Abs(direction.x) > Mathf.Abs(direction.y))
                         {
-                            if (direction.x > 0)
+                            if (direction.x > MIN_SWIPE_DIST)
                                 Swipe((reversDir) ? Dir.LEFT : Dir.RIGHT);
-                            else
+                            else if (direction.x < -MIN_SWIPE_DIST)
                                 Swipe((reversDir) ? Dir.RIGHT : Dir.LEFT);
 
                         }
                         else
                         {
-                            if (direction.y > 0)
+                            if (direction.y > MIN_SWIPE_DIST)
                                 Swipe((reversDir) ? Dir.DOWN : Dir.UP);
-                            else
+                            else if (direction.y < -MIN_SWIPE_DIST)
                                 Swipe((reversDir) ? Dir.UP : Dir.DOWN);
                         }
 

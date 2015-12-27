@@ -9,7 +9,7 @@ namespace equipment.weapons
         public Dagger()// modifier? (chipped, balanced, etc)
         {
             this.damage = 1;
-            this.castTime = 1;
+            this.castTime = 2.0f;
             this.slot = Slot.LEFT_HAND;
         }
 
